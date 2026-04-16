@@ -98,9 +98,35 @@
     }
   });
 
-  // Click to advance on left/right halves
+  // Click to advance — but only a clean click, never a text-selection drag.
+  // Track mousedown position; ignore if the cursor moved (drag) or if
+  // anything is selected by the time we release.
+  let mouseDownX = 0;
+  let mouseDownY = 0;
+  let mouseDownAt = 0;
+
+  document.addEventListener('mousedown', (e) => {
+    mouseDownX = e.clientX;
+    mouseDownY = e.clientY;
+    mouseDownAt = Date.now();
+  });
+
   document.addEventListener('click', (e) => {
-    if (e.target.closest('a, button, .code-block, .kbd')) return;
+    // Skip interactive + selectable content surfaces.
+    if (e.target.closest('a, button, .code-block, .kbd, input, textarea, h1, h2, h3, h4, p, blockquote, li, code, pre, .quote, .move__desc, .callout__body, .loop__meta, .slide__body')) return;
+
+    // Skip if the user is dragging (text selection).
+    const dx = Math.abs(e.clientX - mouseDownX);
+    const dy = Math.abs(e.clientY - mouseDownY);
+    if (dx > 6 || dy > 6) return;
+
+    // Skip if there's an active selection (double-click words, triple-click paragraphs).
+    const sel = window.getSelection && window.getSelection();
+    if (sel && sel.toString().length > 0) return;
+
+    // Skip modifier-key clicks (copy menus, etc.).
+    if (e.shiftKey || e.metaKey || e.ctrlKey || e.altKey) return;
+
     const x = e.clientX;
     const mid = window.innerWidth / 2;
     if (x > mid) setIndex(currentIndex + 1);
