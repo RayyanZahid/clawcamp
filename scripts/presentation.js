@@ -30,7 +30,7 @@
     }
   }
 
-  // IntersectionObserver: mark visible slide, trigger reveals
+  // IntersectionObserver: mark visible slide, trigger reveals + ember convergence
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.intersectionRatio >= 0.5) {
@@ -39,12 +39,55 @@
           currentIndex = idx;
           updateChrome(idx);
           entry.target.classList.add('--visible');
+          // If this slide has an ember stage, schedule convergence
+          const stage = entry.target.querySelector('.ember-stage');
+          if (stage && !stage.dataset.converged) {
+            stage.dataset.converged = 'pending';
+            setTimeout(() => {
+              stage.classList.add('--converged');
+              stage.dataset.converged = 'true';
+            }, 1900);
+          }
         }
       }
     });
   }, {
     root: deck,
     threshold: [0.5, 0.75],
+  });
+
+  // Generate ember particles for any .ember-stage[data-ember-count] on page
+  document.querySelectorAll('.ember-stage').forEach((stage) => {
+    if (stage.dataset.emberInit) return;
+    const count = parseInt(stage.dataset.emberCount || '36', 10);
+    const spread = parseFloat(stage.dataset.emberSpread || '90');
+    const margin = (100 - spread) / 2;
+
+    // Parse target (single point, or list of "x%,y%" separated by space)
+    const targets = (stage.dataset.emberTargets || '50%,50%').split(/\s+/).filter(Boolean);
+
+    for (let i = 0; i < count; i++) {
+      const e = document.createElement('div');
+      e.className = 'ember';
+      const sx = margin + Math.random() * spread;
+      const sy = margin + Math.random() * spread;
+      const dx = (Math.random() - 0.5) * 18;
+      const dy = (Math.random() - 0.5) * 18;
+      e.style.setProperty('--sx', sx + '%');
+      e.style.setProperty('--sy', sy + '%');
+      e.style.setProperty('--dx', dx.toFixed(1) + 'px');
+      e.style.setProperty('--dy', dy.toFixed(1) + 'px');
+      e.style.setProperty('--delay', Math.floor(Math.random() * 700) + 'ms');
+
+      // Pick a target from the list (round-robin)
+      const target = targets[i % targets.length];
+      const [tx, ty] = target.split(',');
+      e.style.setProperty('--tx', tx.trim());
+      e.style.setProperty('--ty', (ty || '50%').trim());
+      e.style.setProperty('--cdelay', Math.floor(i * 18) + 'ms');
+      stage.appendChild(e);
+    }
+    stage.dataset.emberInit = 'true';
   });
 
   slides.forEach((s) => io.observe(s));

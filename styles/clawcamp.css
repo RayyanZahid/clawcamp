@@ -1345,6 +1345,242 @@ body {
 }
 .slide.--visible .pre-b__labels span { opacity: 1; transition-delay: 2400ms; }
 
+/* ================================================================
+   EMBER DRIFT — Part 1 pre-slide animation language
+   ================================================================
+   Part 2 pre-slides use geometric shape-morph (blobs → rectangles).
+   Part 1 pre-slides use the fire/lobster heritage — scattered
+   glowing particles drift chaotically, then converge into a single
+   focal form.  Chaos → focus.  Exactly the thesis of Part 1.
+   Lives on the blaze theme (vermillion + gold on ember black).
+   ================================================================ */
+
+.ember-stage {
+  position: relative;
+  width: clamp(22rem, 50vw, 44rem);
+  height: clamp(11rem, 24vh, 18rem);
+  margin: 0 auto;
+}
+
+.ember {
+  position: absolute;
+  left: var(--sx, 50%);
+  top: var(--sy, 50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffe8b5 0%, #ffab00 25%, #ff3d00 60%, rgba(255, 61, 0, 0.2) 85%, transparent 100%);
+  box-shadow:
+    0 0 10px rgba(255, 171, 0, 0.55),
+    0 0 18px rgba(255, 61, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform, left, top;
+}
+
+.slide.--visible .ember {
+  animation:
+    ember-appear 800ms var(--ease-out-expo) var(--delay, 0ms) forwards,
+    ember-drift 3s var(--ease-in-out-sine) calc(var(--delay, 0ms) + 900ms) infinite alternate;
+}
+
+@keyframes ember-appear {
+  0%   { opacity: 0; transform: scale(0.1); }
+  60%  { opacity: 0.95; transform: scale(1.15); }
+  100% { opacity: 0.85; transform: scale(1); }
+}
+
+@keyframes ember-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(var(--dx, 8px), var(--dy, -6px), 0) scale(1.08); }
+}
+
+/* When the stage converges: all embers transition to the focal point */
+.ember-stage.--converged .ember {
+  animation: none !important;
+  transition:
+    left 1.3s var(--ease-out-expo) var(--cdelay, 0ms),
+    top 1.3s var(--ease-out-expo) var(--cdelay, 0ms),
+    transform 1.3s var(--ease-out-expo) var(--cdelay, 0ms),
+    opacity 1.3s var(--ease-out-expo) var(--cdelay, 0ms);
+  left: var(--tx, 50%);
+  top: var(--ty, 50%);
+  opacity: 0.95;
+  transform: translate3d(-4px, -4px, 0) scale(1.4);
+}
+
+/* The central focal form that fades in after convergence */
+.ember-stage__focal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition:
+    opacity 900ms var(--ease-out-expo) 1800ms,
+    transform 900ms var(--ease-spring) 1800ms;
+  pointer-events: none;
+}
+
+.ember-stage.--converged .ember-stage__focal {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Focal forms — each pre-slide's "resolved" shape */
+
+/* Point (default) — a single bright glow */
+.focal-point {
+  width: clamp(2.5rem, 5vw, 4.5rem);
+  height: clamp(2.5rem, 5vw, 4.5rem);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff5d6 0%, #ffab00 25%, #ff3d00 65%, rgba(255, 61, 0, 0.1) 100%);
+  box-shadow:
+    0 0 30px rgba(255, 171, 0, 0.6),
+    0 0 60px rgba(255, 61, 0, 0.5),
+    0 0 100px rgba(255, 61, 0, 0.25);
+}
+
+/* Horizontal bar — compression, caveman */
+.focal-bar {
+  width: clamp(8rem, 16vw, 14rem);
+  height: clamp(0.9rem, 1.8vw, 1.4rem);
+  background: linear-gradient(90deg, #ff3d00, #ffab00, #ff3d00);
+  border-radius: 3px;
+  box-shadow: 0 0 30px rgba(255, 61, 0, 0.5);
+}
+
+/* Loop — GSD */
+.focal-loop {
+  width: clamp(5rem, 10vw, 9rem);
+  height: clamp(5rem, 10vw, 9rem);
+  border: 3px solid var(--color-accent-1);
+  border-radius: 50%;
+  box-shadow:
+    0 0 25px rgba(255, 61, 0, 0.6),
+    inset 0 0 25px rgba(255, 171, 0, 0.3);
+  position: relative;
+}
+.focal-loop::before {
+  content: '';
+  position: absolute;
+  left: -6px; top: 50%;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--color-accent-2);
+  transform: translateY(-50%);
+  box-shadow: 0 0 12px var(--color-accent-2);
+}
+
+/* Four sparks — four ways context dies */
+.focal-four {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.5rem, 1vw, 1rem);
+}
+.focal-four span {
+  width: clamp(1.5rem, 3vw, 2.5rem);
+  height: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffab00 0%, #ff3d00 60%, transparent);
+  box-shadow: 0 0 20px rgba(255, 61, 0, 0.5);
+}
+
+/* Three columns — three moves */
+.focal-three {
+  display: flex;
+  gap: clamp(0.8rem, 1.5vw, 1.5rem);
+}
+.focal-three span {
+  width: clamp(0.9rem, 1.6vw, 1.4rem);
+  height: clamp(4rem, 8vw, 7rem);
+  background: linear-gradient(180deg, #ffe8b5, #ffab00 30%, #ff3d00);
+  border-radius: 2px;
+  box-shadow: 0 0 20px rgba(255, 61, 0, 0.55);
+}
+
+/* Split — subagent isolation (parent + forked child) */
+.focal-split {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+.focal-split span {
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff5d6 0%, #ffab00 30%, #ff3d00 70%);
+  box-shadow: 0 0 25px rgba(255, 61, 0, 0.55);
+}
+.focal-split span:first-child {
+  width: clamp(3rem, 6vw, 5.5rem);
+  height: clamp(3rem, 6vw, 5.5rem);
+}
+.focal-split span:last-child {
+  width: clamp(1.6rem, 3vw, 2.8rem);
+  height: clamp(1.6rem, 3vw, 2.8rem);
+}
+
+/* Nested rectangles — meta prompting (prompts within prompts) */
+.focal-nested {
+  position: relative;
+  width: clamp(6rem, 12vw, 10rem);
+  height: clamp(4rem, 8vw, 7rem);
+  border: 2px solid var(--color-accent-1);
+  box-shadow: 0 0 20px rgba(255, 61, 0, 0.5);
+}
+.focal-nested::before {
+  content: '';
+  position: absolute;
+  inset: 20%;
+  border: 2px solid var(--color-accent-2);
+  box-shadow: 0 0 15px rgba(255, 171, 0, 0.55);
+}
+.focal-nested::after {
+  content: '';
+  position: absolute;
+  inset: 40%;
+  background: radial-gradient(circle, #ffab00, #ff3d00);
+  border-radius: 2px;
+}
+
+/* Brace — Agent SDK (code-like) */
+.focal-brace {
+  font-family: var(--font-brutalist);
+  font-size: clamp(4rem, 8vw, 8rem);
+  font-weight: 700;
+  color: var(--color-accent-1);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow:
+    0 0 15px rgba(255, 61, 0, 0.7),
+    0 0 40px rgba(255, 171, 0, 0.35);
+}
+
+/* Shell (load / hidden tax) — a pulsating progress ring */
+.focal-ring {
+  width: clamp(4rem, 8vw, 7rem);
+  height: clamp(4rem, 8vw, 7rem);
+  border-radius: 50%;
+  border: 3px solid var(--color-accent-2);
+  border-top-color: transparent;
+  box-shadow: 0 0 25px rgba(255, 171, 0, 0.5);
+  animation: focal-ring-spin 3s linear infinite;
+}
+@keyframes focal-ring-spin {
+  from { transform: translate(-50%, -50%) rotate(0); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Tighter cluster (compress) — dense central knot */
+.focal-knot {
+  width: clamp(2rem, 4vw, 3.5rem);
+  height: clamp(2rem, 4vw, 3.5rem);
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #fff5d6 0%, #ffab00 20%, #ff3d00 50%, #8a0f00 90%, transparent);
+  box-shadow:
+    0 0 20px rgba(255, 61, 0, 0.8),
+    0 0 50px rgba(255, 61, 0, 0.4);
+}
+
 /* -------------------- Shape-morph variants (Part 2 pre-slides) -------------------- */
 /* All share the appear-then-resolve motion from preview B, vary the end state */
 
