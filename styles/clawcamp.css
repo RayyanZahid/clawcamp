@@ -1,0 +1,719 @@
+/* ============================================
+   CLAWCAMP — Presentation overlay on Controlled Chaos
+   Optimized for: large room + medium projector
+   ============================================
+   Typography is OVERSIZED — everything legible from the back row.
+   ============================================ */
+
+/* ---------- Custom force preset (overrides base presets) ---------- */
+[data-forces="clawcamp"] {
+  --force-structure: 0.75;
+  --force-disruption: 0.35;
+  --force-density: 0.35;
+  --force-breath: 0.7;
+  --force-warmth: 0.55;
+  --force-edge: 0.75;
+  --force-stillness: 0.55;
+  --force-motion: 0.45;
+  --force-whisper: 0.25;
+  --force-shout: 0.75;
+}
+
+/* ---------- Room-scale type bumps (for projector) ---------- */
+:root {
+  --type-massive-room:   clamp(5rem, 14vw, 16rem);
+  --type-display-room:   clamp(3.75rem, 9vw, 10rem);
+  --type-headline-room:  clamp(2.5rem, 5vw, 5.5rem);
+  --type-subhead-room:   clamp(1.5rem, 2.5vw, 2.4rem);
+  --type-body-room:      clamp(1.25rem, 1.6vw, 1.75rem);
+  --type-caption-room:   clamp(0.95rem, 1vw, 1.1rem);
+  --lobster-crawl: 'Lobster', cursive;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+/* ---------- Global reset + body ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-swiss);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* ---------- Presentation container ---------- */
+.deck {
+  scroll-snap-type: y mandatory;
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+.deck::-webkit-scrollbar { display: none; }
+
+.slide {
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: clamp(3rem, 5vh, 5rem) clamp(3rem, 6vw, 8rem);
+  display: grid;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ---------- Persistent chrome ---------- */
+.chrome {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.chrome__top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2rem;
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+.chrome__brand {
+  color: var(--color-accent-1);
+  font-weight: 700;
+}
+
+.chrome__brand::before {
+  content: '◆ ';
+}
+
+.chrome__bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 2rem;
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.progress-track {
+  flex: 1;
+  height: 3px;
+  background: var(--color-subtle);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--color-accent-1), var(--color-accent-2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-flow) var(--ease-out-expo);
+}
+
+.slide-counter {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-accent-2);
+  font-weight: 700;
+}
+
+.marquee-band {
+  position: fixed;
+  bottom: 3.5rem;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 0;
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+  z-index: 40;
+  pointer-events: none;
+}
+
+.marquee-band__track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee-scroll 60s linear infinite;
+  gap: 2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-band__track { animation: none; }
+}
+
+.marquee-band__item::after {
+  content: ' ◆ ';
+  color: var(--color-accent-1);
+  margin: 0 0.75rem;
+}
+
+/* ---------- Slide content primitives ---------- */
+.slide__eyebrow {
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent-2);
+  margin: 0 0 1rem 0;
+}
+
+.slide__title {
+  font-family: var(--font-monument);
+  font-size: var(--type-display-room);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--color-fg);
+}
+
+.slide__title--massive {
+  font-size: var(--type-massive-room);
+  line-height: 0.85;
+}
+
+.slide__title--serif {
+  font-family: var(--font-editorial);
+  font-weight: 400;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.slide__body {
+  font-family: var(--font-expressive);
+  font-size: var(--type-body-room);
+  line-height: 1.45;
+  max-width: 22ch;
+  color: var(--color-fg);
+  font-weight: 300;
+}
+
+.slide__body--wide { max-width: 32ch; }
+
+.slide__body strong {
+  color: var(--color-accent-1);
+  font-weight: 700;
+}
+
+.slide__body em {
+  color: var(--color-accent-2);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.accent-red { color: var(--color-accent-1); }
+.accent-gold { color: var(--color-accent-2); }
+.accent-cream { color: var(--color-fg); }
+.accent-discord { color: var(--color-discord); }
+
+/* ---------- Lobster-font discord glyph ---------- */
+.lobster-glyph {
+  font-family: var(--lobster-crawl);
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--color-accent-2);
+  font-weight: 400;
+}
+
+/* ---------- Bullet list ---------- */
+.bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: clamp(1rem, 2vh, 2rem);
+}
+
+.bullet-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem;
+  align-items: baseline;
+  font-family: var(--font-expressive);
+  font-size: var(--type-subhead-room);
+  line-height: 1.3;
+  font-weight: 300;
+  color: var(--color-fg);
+}
+
+.bullet-list li::before {
+  content: attr(data-num);
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  color: var(--color-accent-1);
+  letter-spacing: var(--tracking-wider);
+  font-weight: 700;
+}
+
+.bullet-list--bare li::before { content: '◆'; }
+
+/* ---------- Quote block ---------- */
+.quote {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: var(--type-headline-room);
+  line-height: 1.05;
+  color: var(--color-fg);
+  max-width: 24ch;
+  margin: 0;
+  font-weight: 400;
+}
+
+.quote__source {
+  display: block;
+  margin-top: 1.5rem;
+  font-family: var(--font-brutalist);
+  font-style: normal;
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-accent-2);
+  font-weight: 400;
+}
+
+/* ---------- Code block ---------- */
+.code-block {
+  font-family: var(--font-brutalist);
+  font-size: clamp(0.95rem, 1.15vw, 1.4rem);
+  line-height: 1.55;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent-1);
+  padding: clamp(1rem, 2vh, 2rem);
+  color: var(--color-fg);
+  white-space: pre;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.code-block .kw { color: var(--color-accent-1); }
+.code-block .str { color: var(--color-accent-2); }
+.code-block .fn { color: var(--color-discord); }
+.code-block .com { color: var(--color-muted); font-style: italic; }
+
+/* ---------- Layout: two-column ---------- */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 7rem);
+  align-items: start;
+  height: 100%;
+}
+
+.two-col--weighted {
+  grid-template-columns: 3fr 2fr;
+}
+
+.stack { display: grid; gap: clamp(1rem, 2vh, 2rem); align-content: start; }
+.stack--center { align-content: center; }
+
+/* ---------- Title slide ---------- */
+.slide--title {
+  align-content: center;
+  justify-items: start;
+}
+
+.slide--title .hero {
+  display: grid;
+  gap: clamp(1.5rem, 3vh, 2.5rem);
+  max-width: 100%;
+}
+
+/* ---------- Chart: context rot bars ---------- */
+.rot-chart {
+  display: grid;
+  gap: clamp(0.75rem, 1.5vh, 1.5rem);
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  color: var(--color-muted);
+  margin-top: clamp(1rem, 2vh, 2rem);
+}
+
+.rot-bar {
+  display: grid;
+  grid-template-columns: 7rem 1fr 5rem;
+  gap: 1.5rem;
+  align-items: center;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+.rot-bar__fill {
+  height: 1.75rem;
+  background: linear-gradient(90deg, var(--color-accent-1), var(--color-accent-2));
+  transform-origin: left;
+  transition: transform var(--dur-breathe) var(--ease-out-expo);
+}
+
+.slide.--visible .rot-bar__fill[data-width="95"]  { transform: scaleX(0.95); }
+.slide.--visible .rot-bar__fill[data-width="82"]  { transform: scaleX(0.82); }
+.slide.--visible .rot-bar__fill[data-width="71"]  { transform: scaleX(0.71); }
+.slide.--visible .rot-bar__fill[data-width="58"]  { transform: scaleX(0.58); }
+.slide.--visible .rot-bar__fill[data-width="41"]  { transform: scaleX(0.41); }
+.slide.--visible .rot-bar__fill[data-width="27"]  { transform: scaleX(0.27); }
+
+.rot-bar__fill { transform: scaleX(0); }
+
+.rot-bar__val {
+  color: var(--color-accent-2);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Molt diagram: the 3 moves ---------- */
+.moves-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(2rem, 3vw, 4rem);
+  margin-top: clamp(1rem, 2vh, 2rem);
+}
+
+.move {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--color-accent-1);
+}
+
+.move__num {
+  font-family: var(--font-brutalist);
+  font-size: var(--type-headline-room);
+  color: var(--color-accent-2);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.move__name {
+  font-family: var(--font-monument);
+  font-size: var(--type-subhead-room);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+  color: var(--color-fg);
+}
+
+.move__desc {
+  font-family: var(--font-expressive);
+  font-size: var(--type-body-room);
+  line-height: 1.35;
+  font-weight: 300;
+  color: var(--color-fg);
+  max-width: 20ch;
+}
+
+/* ---------- GSD loop diagram ---------- */
+.loop {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 2.5vw, 3rem);
+  margin-top: clamp(1rem, 2vh, 2rem);
+  align-items: start;
+}
+
+.loop__node {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.25rem;
+  border: 2px solid var(--color-border);
+  background: var(--color-surface);
+  position: relative;
+}
+
+.loop__node:nth-child(1) { border-color: var(--color-accent-1); }
+.loop__node:nth-child(2) { border-color: var(--color-accent-2); }
+.loop__node:nth-child(3) { border-color: var(--color-accent-1); }
+.loop__node:nth-child(4) { border-color: var(--color-accent-2); }
+
+.loop__step {
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  color: var(--color-accent-2);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.loop__name {
+  font-family: var(--font-monument);
+  font-size: clamp(1.75rem, 2.5vw, 2.75rem);
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--color-fg);
+}
+
+.loop__meta {
+  font-family: var(--font-expressive);
+  font-size: var(--type-body-room);
+  line-height: 1.35;
+  color: var(--color-muted);
+  font-weight: 300;
+}
+
+/* ---------- Sacred texts visual (GSD state files) ---------- */
+.file-stack {
+  display: grid;
+  gap: 0.35rem;
+  font-family: var(--font-brutalist);
+  font-size: clamp(1rem, 1.15vw, 1.35rem);
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+.file-stack__line {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.file-stack__line::before {
+  content: '▸';
+  color: var(--color-accent-1);
+}
+
+/* ---------- Callout card (Replit disaster) ---------- */
+.callout {
+  border: 2px solid var(--color-accent-1);
+  padding: clamp(1.5rem, 3vh, 2.5rem);
+  background: var(--color-subtle);
+  display: grid;
+  gap: 1rem;
+  position: relative;
+}
+
+.callout__badge {
+  position: absolute;
+  top: -0.9rem;
+  left: 1.5rem;
+  background: var(--color-bg);
+  padding: 0 0.75rem;
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  color: var(--color-accent-1);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.callout__headline {
+  font-family: var(--font-monument);
+  font-size: var(--type-headline-room);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-accent-1);
+}
+
+.callout__body {
+  font-family: var(--font-expressive);
+  font-size: var(--type-body-room);
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+/* ---------- Lobster glyph ascii ---------- */
+.lobster-ascii {
+  font-family: var(--font-brutalist);
+  font-size: clamp(0.55rem, 0.7vw, 0.9rem);
+  color: var(--color-accent-1);
+  line-height: 1;
+  white-space: pre;
+  opacity: 0.5;
+  animation: drift-float 6s var(--ease-in-out-sine) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lobster-ascii { animation: none; }
+}
+
+/* ---------- Big number ---------- */
+.big-number {
+  font-family: var(--font-monument);
+  font-size: var(--type-massive-room);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: var(--color-accent-1);
+  text-shadow: 0 0 80px rgba(255, 61, 0, 0.3);
+}
+
+.big-number__unit {
+  font-size: 0.35em;
+  color: var(--color-accent-2);
+  margin-left: 0.5rem;
+  letter-spacing: 0;
+}
+
+/* ---------- Keyboard hints ---------- */
+.kbd-hints {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.kbd {
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  background: var(--color-surface);
+}
+
+/* ---------- Scroll reveal (overrides base for slide context) ---------- */
+.slide .reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 700ms var(--ease-out-expo),
+    transform 700ms var(--ease-out-expo);
+}
+
+.slide.--visible .reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide.--visible .reveal:nth-child(1) { transition-delay: 100ms; }
+.slide.--visible .reveal:nth-child(2) { transition-delay: 240ms; }
+.slide.--visible .reveal:nth-child(3) { transition-delay: 380ms; }
+.slide.--visible .reveal:nth-child(4) { transition-delay: 520ms; }
+.slide.--visible .reveal:nth-child(5) { transition-delay: 660ms; }
+
+/* ---------- Workshop final CTA ---------- */
+.cta-strip {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+  padding-top: clamp(2rem, 4vh, 4rem);
+  border-top: 2px solid var(--color-accent-1);
+}
+
+.cta-strip__text {
+  font-family: var(--font-expressive);
+  font-size: var(--type-subhead-room);
+  line-height: 1.3;
+  font-weight: 300;
+}
+
+.cta-link {
+  font-family: var(--font-brutalist);
+  font-size: var(--type-subhead-room);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-accent-1);
+  border: 2px solid var(--color-accent-1);
+  padding: 1rem 1.75rem;
+  text-decoration: none;
+  transition: background var(--dur-snap) var(--ease-out-expo),
+              color var(--dur-snap) var(--ease-out-expo);
+}
+
+.cta-link:hover {
+  background: var(--color-accent-1);
+  color: var(--color-bg);
+}
+
+/* ---------- Sources grid (final slide) ---------- */
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem 2rem;
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  color: var(--color-muted);
+}
+
+.sources-grid a {
+  color: var(--color-accent-2);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur-snap) var(--ease-out-expo);
+}
+
+.sources-grid a:hover {
+  border-bottom-color: var(--color-accent-2);
+}
+
+/* ---------- Ambient glow for blaze mood ---------- */
+.slide--title::before {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    ellipse at 20% 70%,
+    rgba(255, 61, 0, 0.15),
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.slide--title::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    ellipse at 80% 20%,
+    rgba(255, 171, 0, 0.1),
+    transparent 55%
+  );
+  pointer-events: none;
+}
+
+/* ---------- Responsive (also fallback for smaller rooms) ---------- */
+@media (max-width: 900px) {
+  .two-col { grid-template-columns: 1fr; gap: 2rem; }
+  .moves-grid { grid-template-columns: 1fr; }
+  .loop { grid-template-columns: repeat(2, 1fr); }
+  .slide { padding: 4rem 1.5rem; }
+}
+
+/* ---------- Print (for speaker notes / fallback) ---------- */
+@media print {
+  .chrome, .marquee-band { display: none; }
+  .slide { page-break-after: always; border: none; }
+}

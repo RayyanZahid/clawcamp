@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en" data-mood="blaze" data-forces="clawcamp">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ClawCamp — Agent Orchestration, Context Engineering &amp; Meta Prompting</title>
+  <meta name="description" content="Vibe Coding Nights at ClawCamp. A 20-minute workshop on context engineering, meta prompting, the GSD framework, and the Claude Agent SDK. Facilitated by Michalis Vasileiadis." />
+  <meta name="author" content="Michalis Vasileiadis" />
+  <meta property="og:title" content="ClawCamp — Agent Orchestration · Context Engineering · Meta Prompting" />
+  <meta property="og:description" content="The claw is the law. Molt your context. Compile your prompts. Ship agents that don't lie about deleting your database." />
+  <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="tokens/layout.css" />
+  <link rel="stylesheet" href="tokens/typography.css" />
+  <link rel="stylesheet" href="tokens/color.css" />
+  <link rel="stylesheet" href="tokens/motion.css" />
+  <link rel="stylesheet" href="tokens/forces.css" />
+  <link rel="stylesheet" href="styles/clawcamp.css" />
+</head>
+<body class="mood-surface mood-grain">
+
+  <!-- Persistent chrome: top bar + bottom progress/marquee -->
+  <div class="chrome" aria-hidden="true">
+    <div class="chrome__top">
+      <span class="chrome__brand">CLAWCAMP</span>
+      <span>VIBE CODING NIGHTS / APR 2026</span>
+    </div>
+  </div>
+
+  <!-- Marquee: "THE CLAW IS THE LAW" -->
+  <div class="marquee-band" aria-hidden="true">
+    <div class="marquee-band__track">
+      <!-- Double content for seamless loop -->
+      <span class="marquee-band__item">THE CLAW IS THE LAW</span>
+      <span class="marquee-band__item">MOLT YOUR CONTEXT</span>
+      <span class="marquee-band__item">COMPILE YOUR PROMPTS</span>
+      <span class="marquee-band__item">SHIP THE AGENT</span>
+      <span class="marquee-band__item">NEW SHELL · SAME SOUL</span>
+      <span class="marquee-band__item">CONTEXT IS A BUDGET</span>
+      <span class="marquee-band__item">THE CLAW IS THE LAW</span>
+      <span class="marquee-band__item">MOLT YOUR CONTEXT</span>
+      <span class="marquee-band__item">COMPILE YOUR PROMPTS</span>
+      <span class="marquee-band__item">SHIP THE AGENT</span>
+      <span class="marquee-band__item">NEW SHELL · SAME SOUL</span>
+      <span class="marquee-band__item">CONTEXT IS A BUDGET</span>
+    </div>
+  </div>
+
+  <!-- Bottom chrome: progress + counter -->
+  <div class="chrome">
+    <div class="chrome__bottom">
+      <span class="slide-counter">
+        <span data-counter="current">01</span> / <span data-counter="total">12</span>
+      </span>
+      <div class="progress-track">
+        <div class="progress-fill"></div>
+      </div>
+      <span class="kbd-hints">
+        <span class="kbd">←</span><span class="kbd">→</span>
+        <span class="kbd">SPACE</span>
+        <span class="kbd">F</span>
+      </span>
+    </div>
+  </div>
+
+  <main class="deck">
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 01 — TITLE                                       -->
+    <!-- ===================================================== -->
+    <section class="slide slide--title">
+      <div class="hero">
+        <p class="slide__eyebrow reveal">Vibe Coding Nights · Session 01 · 20 min</p>
+        <h1 class="slide__title slide__title--massive reveal">
+          AGENT<br />
+          ORCHES<span class="accent-red">—</span><br />
+          TRATION
+        </h1>
+        <p class="slide__title reveal" style="font-size: var(--type-headline-room); font-weight: 400; line-height: 1; letter-spacing: -0.02em;">
+          <span class="accent-gold">Context Engineering</span>
+          &amp;
+          <span class="accent-red">Meta Prompting</span>
+        </p>
+        <div class="reveal" style="display:flex; gap: 2rem; align-items:baseline; flex-wrap: wrap; margin-top: 2rem;">
+          <span class="slide__eyebrow" style="margin:0;">Facilitated by</span>
+          <span style="font-family: var(--font-editorial); font-size: var(--type-subhead-room); font-style: italic; color: var(--color-fg);">
+            Michalis Vasileiadis
+          </span>
+        </div>
+        <p class="reveal" style="font-family: var(--font-brutalist); font-size: var(--type-caption-room); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-muted); margin-top: 1.5rem;">
+          The <span class="lobster-glyph" style="font-size: 2.2em; line-height: 1; vertical-align: -0.2em;">claw</span> is the law
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 02 — COLD OPEN: REPLIT                           -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="stack stack--center" style="max-width: 100%;">
+        <p class="slide__eyebrow reveal">Cold open · July 2025</p>
+
+        <div class="callout reveal">
+          <span class="callout__badge">Real incident</span>
+          <h2 class="callout__headline">
+            An AI agent deleted a live production database.<br />
+            Then <span class="accent-gold">lied</span> about it.
+          </h2>
+          <p class="callout__body">
+            During a 12-day Replit test, an agent ignored a code freeze, wiped
+            <strong>1,206 executives</strong> and <strong>1,196 companies</strong> from prod,
+            fabricated <strong>4,000 fake users</strong>, then claimed rollback was impossible.
+            It wasn't.
+          </p>
+        </div>
+
+        <p class="slide__body reveal slide__body--wide" style="font-size: var(--type-subhead-room); max-width: 42ch; margin-top: 1rem;">
+          This is not an <em>agent</em> problem.<br />
+          This is a <strong>context</strong> problem.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 03 — THESIS                                      -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="stack stack--center">
+        <p class="slide__eyebrow reveal">The thesis</p>
+        <h2 class="slide__title slide__title--massive reveal" style="max-width: 18ch;">
+          Agent <br/>
+          orchestration<br/>
+          is <span class="accent-red">downstream</span><br/>
+          of context.
+        </h2>
+        <p class="slide__title slide__title--serif reveal" style="font-size: var(--type-headline-room); color: var(--color-accent-2); max-width: 24ch;">
+          Everything else is theater.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 04 — WHAT IS CONTEXT ENGINEERING                 -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="two-col">
+        <div class="stack stack--center">
+          <p class="slide__eyebrow reveal">Definition · June–Sept 2025</p>
+          <h2 class="slide__title reveal">
+            Context <br/>engineering.
+          </h2>
+          <p class="slide__body slide__body--wide reveal">
+            Prompt = one line.<br />
+            Context = <strong>everything the model sees at inference.</strong>
+          </p>
+          <p class="slide__body slide__body--wide reveal" style="color: var(--color-muted);">
+            Tools, memory, retrieved docs, tool results, system prompt, message history,
+            instructions, file tree. The prompt is a tiny fraction.
+          </p>
+        </div>
+        <div class="stack">
+          <blockquote class="quote reveal">
+            "The delicate art and science of filling the context window with
+            <span class="accent-gold">just the right information</span> for the next step."
+            <span class="quote__source">— Andrej Karpathy · Jun 2025</span>
+          </blockquote>
+          <blockquote class="quote reveal" style="font-size: var(--type-subhead-room); color: var(--color-muted);">
+            "Becoming the most important skill an AI engineer can develop."
+            <span class="quote__source">— Harrison Chase · LangChain</span>
+          </blockquote>
+          <blockquote class="quote reveal" style="font-size: var(--type-subhead-room); color: var(--color-muted);">
+            "Find the smallest possible set of <span class="accent-red">high-signal</span> tokens."
+            <span class="quote__source">— Anthropic Engineering</span>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 05 — CONTEXT ROT                                  -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="two-col two-col--weighted">
+        <div class="stack stack--center">
+          <p class="slide__eyebrow reveal">Chroma study · 18 models</p>
+          <h2 class="slide__title reveal">
+            Context <span class="accent-red">rot</span><br/>
+            is real.
+          </h2>
+          <p class="slide__body slide__body--wide reveal">
+            Every frontier model — Claude, GPT, Gemini, Qwen —
+            <strong>degrades before hitting the window limit.</strong>
+          </p>
+          <p class="slide__body slide__body--wide reveal" style="color: var(--color-muted);">
+            Models don't use context uniformly.
+            Every new token depletes the <em>attention budget.</em>
+          </p>
+        </div>
+        <div class="stack">
+          <p class="slide__eyebrow reveal" style="color: var(--color-muted);">Accuracy vs context length</p>
+          <div class="rot-chart reveal">
+            <div class="rot-bar">
+              <span>1K tokens</span>
+              <div class="rot-bar__fill" data-width="95"></div>
+              <span class="rot-bar__val">95%</span>
+            </div>
+            <div class="rot-bar">
+              <span>8K</span>
+              <div class="rot-bar__fill" data-width="82"></div>
+              <span class="rot-bar__val">82%</span>
+            </div>
+            <div class="rot-bar">
+              <span>32K</span>
+              <div class="rot-bar__fill" data-width="71"></div>
+              <span class="rot-bar__val">71%</span>
+            </div>
+            <div class="rot-bar">
+              <span>100K</span>
+              <div class="rot-bar__fill" data-width="58"></div>
+              <span class="rot-bar__val">58%</span>
+            </div>
+            <div class="rot-bar">
+              <span>200K</span>
+              <div class="rot-bar__fill" data-width="41"></div>
+              <span class="rot-bar__val">41%</span>
+            </div>
+            <div class="rot-bar">
+              <span>500K</span>
+              <div class="rot-bar__fill" data-width="27"></div>
+              <span class="rot-bar__val">27%</span>
+            </div>
+          </div>
+          <p class="reveal" style="font-family: var(--font-brutalist); font-size: var(--type-caption-room); color: var(--color-muted); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-top: 1rem;">
+            Directional. Source: trychroma.com/research/context-rot
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 06 — FOUR WAYS CONTEXT DIES                      -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="stack" style="align-content: start;">
+        <p class="slide__eyebrow reveal">Breunig taxonomy · 2025</p>
+        <h2 class="slide__title reveal" style="margin-bottom: 1rem;">
+          Four ways context <span class="accent-red">dies.</span>
+        </h2>
+
+        <div class="moves-grid reveal" style="grid-template-columns: repeat(4, 1fr); margin-top: 1rem;">
+          <div class="move">
+            <div class="move__num">01</div>
+            <div class="move__name">Poison</div>
+            <p class="move__desc">A hallucination enters context and gets referenced forever. (Gemini played Pokémon and invented goals it couldn't achieve.)</p>
+          </div>
+          <div class="move">
+            <div class="move__num">02</div>
+            <div class="move__name">Distract</div>
+            <p class="move__desc">Past ~100k, agents favor repeating history over inventing new plans. Memory beats reasoning.</p>
+          </div>
+          <div class="move">
+            <div class="move__num">03</div>
+            <div class="move__name">Confuse</div>
+            <p class="move__desc">More tools = worse performance. Berkeley's function-calling leaderboard confirms it across every model.</p>
+          </div>
+          <div class="move">
+            <div class="move__num">04</div>
+            <div class="move__name">Clash</div>
+            <p class="move__desc">Sharded prompts with conflicting guidance drop scores <strong>39%</strong>. o3 fell 98 → 64.</p>
+          </div>
+        </div>
+
+        <p class="slide__body slide__body--wide reveal" style="margin-top: 2rem; font-size: var(--type-subhead-room);">
+          Every failure mode is a context mode.
+          Fix the context, the agent gets smarter <em>for free.</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 07 — THREE MOVES TO WIN                          -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="stack" style="align-content: start;">
+        <p class="slide__eyebrow reveal">Optimize these three</p>
+        <h2 class="slide__title reveal">
+          Three moves<br/>
+          to <span class="accent-gold">win.</span>
+        </h2>
+
+        <div class="moves-grid reveal">
+          <div class="move">
+            <div class="move__num">01</div>
+            <div class="move__name">Compress</div>
+            <p class="move__desc">
+              Smallest high-signal tokens. Prune tool results.
+              Summarize history. Kill stale files.
+            </p>
+          </div>
+          <div class="move">
+            <div class="move__num">02</div>
+            <div class="move__name">Isolate</div>
+            <p class="move__desc">
+              Subagents with <strong>fresh 200K windows</strong>.
+              Anthropic: <span class="accent-gold">+90.2%</span> on research evals vs single agent.
+            </p>
+          </div>
+          <div class="move">
+            <div class="move__num">03</div>
+            <div class="move__name">Persist</div>
+            <p class="move__desc">
+              State in <code style="font-family: var(--font-brutalist); color: var(--color-accent-2);">*.md</code> files,
+              not in the conversation. Survives <code style="font-family: var(--font-brutalist); color: var(--color-accent-2);">/clear</code>.
+            </p>
+          </div>
+        </div>
+
+        <p class="slide__body slide__body--wide reveal" style="margin-top: 2rem; font-size: var(--type-subhead-room); max-width: 46ch;">
+          Optimize these three <span class="accent-gold">and you optimize everything downstream.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 08 — META PROMPTING                              -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="two-col">
+        <div class="stack stack--center">
+          <p class="slide__eyebrow reveal">Meta prompting</p>
+          <h2 class="slide__title reveal">
+            Let the AI<br/>
+            write <span class="accent-red">the prompts.</span>
+          </h2>
+          <p class="slide__body slide__body--wide reveal" style="font-size: var(--type-subhead-room); max-width: 32ch;">
+            Stop hand-crafting.<br />
+            <strong>Start compiling.</strong>
+          </p>
+          <blockquote class="quote reveal" style="font-size: var(--type-subhead-room); color: var(--color-muted); max-width: 32ch;">
+            "DSPy is my context engineering tool of choice."
+            <span class="quote__source">— Tobi Lütke · Shopify CEO</span>
+          </blockquote>
+        </div>
+        <div class="stack">
+          <p class="slide__eyebrow reveal">Tools that write prompts for you</p>
+          <ul class="bullet-list reveal">
+            <li data-num="01">
+              <div>
+                <strong style="color: var(--color-accent-1);">Anthropic Prompt Generator</strong><br />
+                <span style="color: var(--color-muted); font-size: 0.8em;">Console → describe your task → Claude drafts a production prompt</span>
+              </div>
+            </li>
+            <li data-num="02">
+              <div>
+                <strong style="color: var(--color-accent-1);">OpenAI Generate</strong><br />
+                <span style="color: var(--color-muted); font-size: 0.8em;">Playground button: generates prompts + schemas + functions</span>
+              </div>
+            </li>
+            <li data-num="03">
+              <div>
+                <strong style="color: var(--color-accent-1);">DSPy</strong><br />
+                <span style="color: var(--color-muted); font-size: 0.8em;">"Programming, not prompting." Compilers mutate prompts via LLM reflection.</span>
+              </div>
+            </li>
+            <li data-num="04">
+              <div>
+                <strong style="color: var(--color-accent-1);">TextGrad</strong><br />
+                <span style="color: var(--color-muted); font-size: 0.8em;">LLM-generated textual gradients optimize prompts like backprop.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 09 — GSD FRAMEWORK                                -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="stack" style="align-content: start;">
+        <p class="slide__eyebrow reveal">github.com/gsd-build/get-shit-done · 54K ★</p>
+        <h2 class="slide__title reveal">
+          <span class="accent-gold">GSD</span> puts it all<br/>
+          in <span class="accent-red">one loop.</span>
+        </h2>
+
+        <div class="loop reveal">
+          <div class="loop__node">
+            <span class="loop__step">Phase 01</span>
+            <span class="loop__name">Research</span>
+            <p class="loop__meta">4 parallel researchers. Fresh subagents. Main thread never sees the noise.</p>
+          </div>
+          <div class="loop__node">
+            <span class="loop__step">Phase 02</span>
+            <span class="loop__name">Plan</span>
+            <p class="loop__meta">Atomic XML plans. A plan-checker loops up to 3×. Meta-prompting in action.</p>
+          </div>
+          <div class="loop__node">
+            <span class="loop__step">Phase 03</span>
+            <span class="loop__name">Execute</span>
+            <p class="loop__meta">Wave-based. Each plan runs in its own fresh 200K window.</p>
+          </div>
+          <div class="loop__node">
+            <span class="loop__step">Phase 04</span>
+            <span class="loop__name">Verify</span>
+            <p class="loop__meta">A separate agent checks. Can't be yes-biased by the executor.</p>
+          </div>
+        </div>
+
+        <div class="two-col reveal" style="margin-top: 2rem; align-items: center;">
+          <div class="stack">
+            <blockquote class="quote" style="font-size: var(--type-subhead-room); max-width: 40ch;">
+              "Your main context stays at <span class="accent-gold">30–40%.</span>
+              The work happens in <span class="accent-red">fresh subagent contexts.</span>"
+              <span class="quote__source">— GSD README</span>
+            </blockquote>
+          </div>
+          <div class="stack">
+            <p class="slide__eyebrow" style="color: var(--color-muted);">State lives in files, not conversation</p>
+            <div class="file-stack">
+              <div class="file-stack__line"><code>.planning/</code></div>
+              <div class="file-stack__line"><code style="padding-left: 2rem;">PROJECT.md</code></div>
+              <div class="file-stack__line"><code style="padding-left: 2rem;">PLAN.md</code></div>
+              <div class="file-stack__line"><code style="padding-left: 2rem;">STATE.md</code></div>
+              <div class="file-stack__line"><code style="padding-left: 2rem;">VERIFICATION.md</code></div>
+            </div>
+            <div class="code-block" style="margin-top: 1rem; font-size: clamp(0.85rem, 1vw, 1.1rem);">
+<span class="com"># install</span>
+npx get-shit-done-cc@latest</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 10 — CLAUDE AGENT SDK                            -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="stack" style="align-content: start;">
+        <p class="slide__eyebrow reveal">code.claude.com/docs/en/agent-sdk</p>
+        <h2 class="slide__title reveal">
+          Now you <span class="accent-red">build.</span>
+        </h2>
+
+        <div class="two-col reveal" style="margin-top: 1rem; align-items: start;">
+          <div class="stack">
+            <p class="slide__body slide__body--wide" style="font-size: var(--type-subhead-room); max-width: 30ch;">
+              <strong>Claude Agent SDK</strong> is Claude Code <em>as a library.</em><br />
+              Same tools. Same loop. Same guardrails.
+            </p>
+            <div class="code-block">
+<span class="kw">import</span> asyncio
+<span class="kw">from</span> claude_agent_sdk <span class="kw">import</span> query, ClaudeAgentOptions
+
+<span class="kw">async def</span> <span class="fn">main</span>():
+    <span class="kw">async for</span> msg <span class="kw">in</span> query(
+        prompt=<span class="str">"Fix the bug in auth.py"</span>,
+        options=ClaudeAgentOptions(
+            allowed_tools=[<span class="str">"Read"</span>, <span class="str">"Edit"</span>, <span class="str">"Glob"</span>]
+        ),
+    ):
+        <span class="fn">print</span>(msg)
+
+asyncio.run(main())</div>
+          </div>
+          <div class="stack">
+            <p class="slide__eyebrow" style="color: var(--color-muted);">Primitives you compose</p>
+            <ul class="bullet-list bullet-list--bare" style="font-size: var(--type-body-room);">
+              <li><div><strong style="color: var(--color-accent-1);">Tools</strong> — Read, Edit, Bash, Glob, Grep, WebSearch, MCP servers</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Subagents</strong> — spawn specialists, isolate context</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Hooks</strong> — PreToolUse, PostToolUse, Stop — audit &amp; gate</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Sessions</strong> — persist, resume, fork</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Your Claude Code skills</strong> — via <code style="font-family:var(--font-brutalist); color:var(--color-accent-2);">setting_sources=["project"]</code></div></li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="slide__body slide__body--wide reveal" style="margin-top: 2rem; font-size: var(--type-subhead-room); max-width: 58ch;">
+          <strong class="accent-gold">Beginner:</strong> first agent in 12 lines.
+          <strong class="accent-gold">Intermediate:</strong> production multi-agent systems in CI/CD — using the same engine.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 11 — WORKSHOP CTA                                 -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="stack stack--center">
+        <p class="slide__eyebrow reveal">Now: open working session</p>
+        <h2 class="slide__title slide__title--massive reveal">
+          Now <br/>
+          you <span class="lobster-glyph" style="font-size: 0.8em;">molt</span>.
+        </h2>
+        <p class="slide__body slide__body--wide reveal" style="font-size: var(--type-subhead-room); max-width: 40ch; margin-top: 1rem;">
+          Find a real pain.<br />
+          Instrument it with <strong>GSD</strong> or the <strong>Agent SDK</strong>.<br />
+          Get <em>Michalis</em> 1:1.
+        </p>
+
+        <div class="cta-strip reveal" style="margin-top: 2rem;">
+          <p class="cta-strip__text">
+            Ship something that didn't exist an hour ago.<br />
+            <span style="color: var(--color-muted);">New shell. Same soul.</span>
+          </p>
+          <span class="cta-link">↗ BUILD</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE 12 — SOURCES & CREDITS                           -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="stack" style="align-content: start;">
+        <p class="slide__eyebrow reveal">Read deeper · every claim sourced</p>
+        <h2 class="slide__title reveal" style="font-size: var(--type-headline-room);">
+          The archive.
+        </h2>
+
+        <div class="two-col reveal" style="margin-top: 1rem; gap: 3rem;">
+          <div class="stack">
+            <p class="slide__eyebrow" style="color: var(--color-muted);">Context Engineering</p>
+            <div class="sources-grid">
+              <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Anthropic · Effective context engineering</a>
+              <a href="https://www.anthropic.com/engineering/multi-agent-research-system" target="_blank" rel="noopener">Anthropic · Multi-agent research system</a>
+              <a href="https://www.langchain.com/blog/the-rise-of-context-engineering" target="_blank" rel="noopener">LangChain · The rise of context engineering</a>
+              <a href="https://simonwillison.net/2025/jun/27/context-engineering/" target="_blank" rel="noopener">Simon Willison · Context engineering</a>
+              <a href="https://www.trychroma.com/research/context-rot" target="_blank" rel="noopener">Chroma · Context rot study</a>
+              <a href="https://www.dbreunig.com/2025/06/22/how-contexts-fail-and-how-to-fix-them.html" target="_blank" rel="noopener">Breunig · How contexts fail</a>
+              <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus" target="_blank" rel="noopener">Manus · Lessons from production</a>
+            </div>
+          </div>
+          <div class="stack">
+            <p class="slide__eyebrow" style="color: var(--color-muted);">Meta Prompting · Frameworks · SDK</p>
+            <div class="sources-grid">
+              <a href="https://github.com/gsd-build/get-shit-done" target="_blank" rel="noopener">GSD · github.com/gsd-build</a>
+              <a href="https://code.claude.com/docs/en/agent-sdk/overview" target="_blank" rel="noopener">Claude Agent SDK · overview</a>
+              <a href="https://code.claude.com/docs/en/agent-sdk/quickstart" target="_blank" rel="noopener">Claude Agent SDK · quickstart</a>
+              <a href="https://github.com/anthropics/claude-agent-sdk-python" target="_blank" rel="noopener">SDK · Python repo</a>
+              <a href="https://github.com/anthropics/claude-agent-sdk-typescript" target="_blank" rel="noopener">SDK · TypeScript repo</a>
+              <a href="https://dspy.ai/" target="_blank" rel="noopener">DSPy · programming not prompting</a>
+              <a href="https://www.anthropic.com/news/prompt-generator" target="_blank" rel="noopener">Anthropic · Prompt generator</a>
+              <a href="https://openclaw.ai/" target="_blank" rel="noopener">openclaw.ai · the lobster</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-strip reveal" style="margin-top: 3rem; border-color: var(--color-accent-2);">
+          <p class="cta-strip__text" style="color: var(--color-muted);">
+            <span class="accent-gold">ClawCamp · Vibe Coding Nights</span><br />
+            Facilitated by Michalis Vasileiadis · The claw is the law
+          </p>
+          <span style="font-family: var(--font-brutalist); font-size: var(--type-caption-room); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent-2);">
+            ◆ end ◆
+          </span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="scripts/presentation.js" defer></script>
+</body>
+</html>
