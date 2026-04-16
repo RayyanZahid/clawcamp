@@ -1157,6 +1157,278 @@ body {
   text-transform: uppercase;
 }
 
+/* ================================================================
+   PRE-SLIDES — breath slides. 3–5 words. One clever motion.
+   ================================================================
+   A pre-slide sits immediately before a heady technical slide.
+   Gives the room 8–15 seconds to focus, gives the speaker time to
+   orient before the deep dive.
+   ================================================================ */
+
+.slide--pre {
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.slide--pre .pre__chip {
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  padding: 0.35rem 0.75rem;
+  border: 1px solid currentColor;
+  width: fit-content;
+  margin-bottom: clamp(2rem, 5vh, 3.5rem);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 500ms var(--ease-out-expo),
+              transform 500ms var(--ease-out-expo);
+}
+.slide.--visible .pre__chip { opacity: 1; transform: translateY(0); }
+
+.slide--pre .pre__chip strong { color: var(--color-accent-1); font-weight: 700; }
+
+.slide--pre .pre__caption {
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent-1);
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out-expo) 1800ms;
+}
+.slide.--visible .pre__caption { opacity: 1; }
+
+/* -------------------- VARIANT A — Typographic flip -------------------- */
+/* ANY → OK. Massive type. Strike-through + slam. */
+
+.pre-a__flow {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: baseline;
+  font-family: var(--font-monument);
+  font-size: clamp(5rem, 13vw, 14rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+}
+
+.pre-a__word {
+  display: inline-block;
+  position: relative;
+  opacity: 0;
+}
+
+.pre-a__word--any {
+  color: var(--color-muted);
+}
+.slide.--visible .pre-a__word--any {
+  animation:
+    pre-fadeIn 700ms var(--ease-out-expo) 300ms forwards,
+    pre-strike 500ms var(--ease-out-expo) 1200ms forwards;
+}
+
+.pre-a__word--any::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 55%;
+  height: 0.12em;
+  background: var(--color-accent-2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 450ms var(--ease-out-expo);
+}
+.slide.--visible .pre-a__word--any::after {
+  transform: scaleX(1);
+  transition-delay: 1200ms;
+}
+
+.pre-a__arrow {
+  color: var(--color-fg);
+  font-family: var(--font-monument);
+}
+.slide.--visible .pre-a__arrow {
+  animation: pre-fadeIn 700ms var(--ease-out-expo) 800ms forwards;
+}
+
+.pre-a__word--ok {
+  color: var(--color-accent-1);
+}
+.slide.--visible .pre-a__word--ok {
+  animation: pre-slamIn 600ms var(--ease-spring) 1500ms forwards,
+             pre-glow 1800ms var(--ease-in-out-sine) 2100ms;
+}
+
+@keyframes pre-fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pre-strike {
+  from { color: var(--color-muted); }
+  to { color: var(--color-border); }
+}
+@keyframes pre-slamIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.88); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes pre-glow {
+  0%, 100% { text-shadow: none; }
+  50% { text-shadow: 0 0 40px rgba(0, 65, 196, 0.3); }
+}
+
+/* -------------------- VARIANT B — Shape morph -------------------- */
+/* Five blobs resolve into five identical rectangles */
+
+.pre-b__row {
+  display: flex;
+  gap: clamp(0.75rem, 1.2vw, 1.5rem);
+  align-items: center;
+}
+
+.pre-b__cell {
+  width: clamp(3.5rem, 6vw, 6rem);
+  height: clamp(3.5rem, 6vw, 6rem);
+  background: var(--color-accent-1);
+  opacity: 0;
+}
+
+/* Each blob has wild asymmetric corners, different color */
+.pre-b__cell--blob-1 { border-radius: 78% 22% 58% 42% / 45% 72% 28% 55%; background: #c72e1a; }
+.pre-b__cell--blob-2 { border-radius: 38% 62% 82% 18% / 62% 38% 52% 48%; background: #0041c4; }
+.pre-b__cell--blob-3 { border-radius: 62% 38% 28% 72% / 38% 55% 45% 62%; background: #e07b2d; }
+.pre-b__cell--blob-4 { border-radius: 82% 18% 55% 45% / 22% 48% 52% 78%; background: #5a5a52; }
+.pre-b__cell--blob-5 { border-radius: 28% 72% 38% 62% / 72% 28% 58% 42%; background: #8a2b1c; }
+
+.slide.--visible .pre-b__cell {
+  animation:
+    pre-b-appear 600ms var(--ease-out-expo) forwards,
+    pre-b-resolve 900ms var(--ease-spring) forwards;
+}
+.slide.--visible .pre-b__cell:nth-child(1) { animation-delay: 200ms,  1400ms; }
+.slide.--visible .pre-b__cell:nth-child(2) { animation-delay: 320ms,  1520ms; }
+.slide.--visible .pre-b__cell:nth-child(3) { animation-delay: 440ms,  1640ms; }
+.slide.--visible .pre-b__cell:nth-child(4) { animation-delay: 560ms,  1760ms; }
+.slide.--visible .pre-b__cell:nth-child(5) { animation-delay: 680ms,  1880ms; }
+
+@keyframes pre-b-appear {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes pre-b-resolve {
+  to {
+    border-radius: 2px;
+    background: var(--color-accent-1);
+  }
+}
+
+.pre-b__labels {
+  display: flex;
+  gap: clamp(0.75rem, 1.2vw, 1.5rem);
+  margin-top: 1rem;
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  color: var(--color-muted);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+.pre-b__labels span {
+  width: clamp(3.5rem, 6vw, 6rem);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 500ms var(--ease-out-expo);
+}
+.slide.--visible .pre-b__labels span { opacity: 1; transition-delay: 2400ms; }
+
+/* -------------------- VARIANT C — Socket / interface lock -------------------- */
+/* Four mismatched tiles drop. One fits. */
+
+.pre-c__stage {
+  position: relative;
+  width: clamp(22rem, 44vw, 40rem);
+  height: clamp(14rem, 28vh, 22rem);
+}
+
+.pre-c__socket {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: clamp(6rem, 10vw, 10rem);
+  height: clamp(3rem, 5vw, 5rem);
+  border: 2px dashed var(--color-accent-1);
+  background: transparent;
+  opacity: 0;
+}
+.slide.--visible .pre-c__socket {
+  animation: pre-fadeIn 600ms var(--ease-out-expo) 300ms forwards;
+}
+
+.pre-c__piece {
+  position: absolute;
+  width: clamp(3rem, 5vw, 5rem);
+  height: clamp(3rem, 5vw, 5rem);
+  top: 0;
+  opacity: 0;
+}
+
+/* Mismatched shapes — shouldn't fit */
+.pre-c__piece--1 { left: 10%;  background: #c72e1a; border-radius: 50%; }
+.pre-c__piece--2 { left: 28%;  background: #0041c4; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.pre-c__piece--3 { left: 46%;  background: #e07b2d; border-radius: 40% 60% 60% 40% / 30% 30% 70% 70%; }
+.pre-c__piece--4 { left: 64%;  background: #5a5a52; clip-path: polygon(20% 0, 100% 20%, 80% 100%, 0 80%); }
+
+/* The match — a clean rectangle in accent color */
+.pre-c__piece--match {
+  left: 82%;
+  background: var(--color-accent-1);
+  border-radius: 2px;
+  width: clamp(6rem, 10vw, 10rem);
+  height: clamp(3rem, 5vw, 5rem);
+}
+
+.slide.--visible .pre-c__piece--1,
+.slide.--visible .pre-c__piece--2,
+.slide.--visible .pre-c__piece--3,
+.slide.--visible .pre-c__piece--4 {
+  animation:
+    pre-c-drop-bounce 1100ms var(--ease-out-expo) forwards;
+}
+.slide.--visible .pre-c__piece--1 { animation-delay: 900ms; }
+.slide.--visible .pre-c__piece--2 { animation-delay: 1050ms; }
+.slide.--visible .pre-c__piece--3 { animation-delay: 1200ms; }
+.slide.--visible .pre-c__piece--4 { animation-delay: 1350ms; }
+
+@keyframes pre-c-drop-bounce {
+  0%   { opacity: 0; top: -20%; }
+  30%  { opacity: 1; top: 35%; }
+  45%  { top: 55%; transform: rotate(-8deg); }
+  55%  { top: 32%; transform: rotate(12deg); }
+  75%  { top: 38%; transform: rotate(-6deg); opacity: 0.4; }
+  100% { top: 120%; opacity: 0; transform: rotate(25deg); }
+}
+
+.slide.--visible .pre-c__piece--match {
+  animation: pre-c-drop-lock 1100ms var(--ease-out-expo) 1600ms forwards;
+}
+
+@keyframes pre-c-drop-lock {
+  0%   { opacity: 0; top: -20%; left: 82%; }
+  40%  { opacity: 1; top: 10%; left: 82%; }
+  60%  { top: 20%; left: 50%; transform: translateX(-50%); }
+  100% {
+    top: calc(100% - clamp(3rem, 5vw, 5rem));
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+  }
+}
+
 /* Rate-limit meter */
 .rate-meter {
   display: grid;
