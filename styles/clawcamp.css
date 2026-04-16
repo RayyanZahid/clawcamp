@@ -1441,13 +1441,42 @@ body {
     0 0 100px rgba(255, 61, 0, 0.25);
 }
 
-/* Horizontal bar — compression, caveman */
+/* Heat-to-ash bar — context rot. Starts bright, fades to gray */
 .focal-bar {
-  width: clamp(8rem, 16vw, 14rem);
+  width: clamp(12rem, 28vw, 24rem);
   height: clamp(0.9rem, 1.8vw, 1.4rem);
-  background: linear-gradient(90deg, #ff3d00, #ffab00, #ff3d00);
-  border-radius: 3px;
-  box-shadow: 0 0 30px rgba(255, 61, 0, 0.5);
+  background: linear-gradient(
+    90deg,
+    #fff5d6 0%,
+    #ffab00 10%,
+    #ff3d00 25%,
+    #b23a1a 50%,
+    #7a4030 70%,
+    #4a4238 88%,
+    rgba(70, 60, 52, 0) 100%
+  );
+  border-radius: 2px 0 0 2px;
+  box-shadow:
+    inset 12px 0 16px rgba(255, 171, 0, 0.4),
+    -4px 0 20px rgba(255, 61, 0, 0.5);
+  position: relative;
+}
+.focal-bar::after {
+  /* Ash flecks trailing off the end */
+  content: '';
+  position: absolute;
+  right: -8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30%;
+  height: 140%;
+  background-image:
+    radial-gradient(circle at 20% 40%, #5a4a42 0 1.5px, transparent 2px),
+    radial-gradient(circle at 60% 70%, #7a5040 0 1px, transparent 1.5px),
+    radial-gradient(circle at 80% 30%, #4a4038 0 1.5px, transparent 2px),
+    radial-gradient(circle at 35% 20%, #6a5040 0 1px, transparent 1.5px);
+  background-repeat: no-repeat;
+  opacity: 0.7;
 }
 
 /* Loop — GSD */
@@ -1486,17 +1515,154 @@ body {
   box-shadow: 0 0 20px rgba(255, 61, 0, 0.5);
 }
 
-/* Three columns — three moves */
-.focal-three {
-  display: flex;
-  gap: clamp(0.8rem, 1.5vw, 1.5rem);
+/* Upward chevron — three moves (directional win, not 3 columns) */
+.focal-chevron {
+  width: clamp(6rem, 12vw, 10rem);
+  height: clamp(6rem, 12vw, 10rem);
+  position: relative;
+  filter: drop-shadow(0 0 25px rgba(255, 61, 0, 0.55));
 }
-.focal-three span {
-  width: clamp(0.9rem, 1.6vw, 1.4rem);
-  height: clamp(4rem, 8vw, 7rem);
-  background: linear-gradient(180deg, #ffe8b5, #ffab00 30%, #ff3d00);
-  border-radius: 2px;
-  box-shadow: 0 0 20px rgba(255, 61, 0, 0.55);
+.focal-chevron::before,
+.focal-chevron::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: clamp(3rem, 6vw, 5rem) solid transparent;
+  border-right: clamp(3rem, 6vw, 5rem) solid transparent;
+  transform: translateX(-50%);
+}
+.focal-chevron::before {
+  /* outer vermillion chevron */
+  bottom: 0;
+  border-bottom: clamp(6rem, 12vw, 10rem) solid var(--color-accent-1);
+}
+.focal-chevron::after {
+  /* inner gold chevron — cut-out */
+  bottom: 0;
+  border-left-width: clamp(2rem, 4vw, 3.35rem);
+  border-right-width: clamp(2rem, 4vw, 3.35rem);
+  border-bottom: clamp(4rem, 8vw, 6.7rem) solid var(--color-bg);
+}
+
+/* Tiny point — for context-def's "prompt" surrounded by vast context */
+.focal-point--tiny {
+  width: clamp(1rem, 2vw, 1.6rem);
+  height: clamp(1rem, 2vw, 1.6rem);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff5d6, #ffab00 40%, #ff3d00 70%);
+  box-shadow:
+    0 0 15px rgba(255, 171, 0, 0.9),
+    0 0 35px rgba(255, 61, 0, 0.7),
+    0 0 70px rgba(255, 61, 0, 0.35);
+}
+.focal-point--tiny::after {
+  content: 'prompt';
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 0.4rem);
+  transform: translateX(-50%);
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+/* Container 80% filled — hidden tax (token budget already spent) */
+.focal-container {
+  position: relative;
+  width: clamp(14rem, 32vw, 28rem);
+  height: clamp(2.2rem, 4vw, 3.5rem);
+  border: 2px solid var(--color-accent-1);
+  box-shadow: 0 0 22px rgba(255, 61, 0, 0.4);
+  overflow: hidden;
+}
+.focal-container__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 80%;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      #ff3d00 0 4px,
+      #ffab00 4px 8px,
+      #ff3d00 8px 12px
+    );
+  box-shadow: inset 0 0 20px rgba(255, 61, 0, 0.35);
+}
+.focal-container__gap {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 20%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border-left: 2px dashed var(--color-accent-2);
+}
+
+/* Fracture mode for "four ways context dies" —
+   embers converge to center, then explode outward and dim.
+   Triggered by JS adding .--fractured after .--converged. */
+.ember-stage.--fractured .ember {
+  transition:
+    left 1.6s var(--ease-out-expo) var(--cdelay, 0ms),
+    top 1.6s var(--ease-out-expo) var(--cdelay, 0ms),
+    opacity 1.6s var(--ease-out-expo) var(--cdelay, 0ms),
+    transform 1.6s var(--ease-out-expo) var(--cdelay, 0ms) !important;
+  left: var(--fx, 50%) !important;
+  top: var(--fy, 50%) !important;
+  opacity: 0.25 !important;
+  transform: translate3d(0, 0, 0) scale(0.5) !important;
+}
+
+/* Cracks radiating outward — four ways */
+.focal-cracks {
+  width: clamp(12rem, 22vw, 20rem);
+  height: clamp(12rem, 22vw, 20rem);
+  position: relative;
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out-expo) 2600ms;
+}
+.ember-stage.--fractured .focal-cracks { opacity: 0.65; }
+
+.focal-cracks span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 61, 0, 0.9),
+    rgba(255, 61, 0, 0.4) 60%,
+    transparent
+  );
+  transform-origin: top center;
+  box-shadow: 0 0 10px rgba(255, 61, 0, 0.55);
+}
+.focal-cracks span:nth-child(1) { transform: translate(-50%, 0) rotate(42deg); }
+.focal-cracks span:nth-child(2) { transform: translate(-50%, 0) rotate(138deg); }
+.focal-cracks span:nth-child(3) { transform: translate(-50%, 0) rotate(228deg); }
+.focal-cracks span:nth-child(4) { transform: translate(-50%, 0) rotate(314deg); }
+
+/* Scatter mode: embers stay dispersed (for context-def) */
+.ember-stage--scatter.--converged .ember {
+  transition:
+    opacity 1s var(--ease-out-expo) var(--cdelay, 0ms),
+    transform 1s var(--ease-out-expo) var(--cdelay, 0ms) !important;
+  left: var(--sx) !important;
+  top: var(--sy) !important;
+  opacity: 0.35 !important;
+  transform: translate3d(0, 0, 0) scale(0.85) !important;
 }
 
 /* Split — subagent isolation (parent + forked child) */

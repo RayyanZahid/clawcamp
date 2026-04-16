@@ -47,6 +47,12 @@
               stage.classList.add('--converged');
               stage.dataset.converged = 'true';
             }, 1900);
+            // Fracture mode: second phase after convergence — embers scatter and dim
+            if (stage.dataset.emberMode === 'fracture') {
+              setTimeout(() => {
+                stage.classList.add('--fractured');
+              }, 3100);
+            }
           }
         }
       }
@@ -63,8 +69,10 @@
     const spread = parseFloat(stage.dataset.emberSpread || '90');
     const margin = (100 - spread) / 2;
 
-    // Parse target (single point, or list of "x%,y%" separated by space)
+    // Parse converge targets (single point, or list of "x%,y%" separated by space)
     const targets = (stage.dataset.emberTargets || '50%,50%').split(/\s+/).filter(Boolean);
+    // Fracture targets — second phase positions for the fracture mode
+    const fractures = (stage.dataset.emberFractures || '').split(/\s+/).filter(Boolean);
 
     for (let i = 0; i < count; i++) {
       const e = document.createElement('div');
@@ -85,6 +93,22 @@
       e.style.setProperty('--tx', tx.trim());
       e.style.setProperty('--ty', (ty || '50%').trim());
       e.style.setProperty('--cdelay', Math.floor(i * 18) + 'ms');
+
+      // Fracture target (phase 2) — either explicit list or radial explosion from center
+      if (fractures.length > 0) {
+        const fracture = fractures[i % fractures.length];
+        const [fx, fy] = fracture.split(',');
+        e.style.setProperty('--fx', fx.trim());
+        e.style.setProperty('--fy', (fy || '50%').trim());
+      } else if (stage.dataset.emberMode === 'fracture') {
+        // Radial explosion — each ember gets a random outward direction
+        const angle = (i / count) * Math.PI * 2 + (Math.random() - 0.5) * 0.8;
+        const radius = 45 + Math.random() * 25;
+        const fx = 50 + Math.cos(angle) * radius;
+        const fy = 50 + Math.sin(angle) * radius;
+        e.style.setProperty('--fx', fx.toFixed(1) + '%');
+        e.style.setProperty('--fy', fy.toFixed(1) + '%');
+      }
       stage.appendChild(e);
     }
     stage.dataset.emberInit = 'true';
