@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>ClawCamp — Agent Orchestration, Context Engineering &amp; Meta Prompting</title>
+  <title>ClawCamp · Agent Orchestration, Context Engineering &amp; Meta Prompting</title>
   <meta name="description" content="Vibe Coding Nights at ClawCamp. A 20-minute workshop on context engineering, meta prompting, the GSD framework, and the Claude Agent SDK. By Michalis Vasileiadis & Rayyan Zahid." />
   <meta name="author" content="Michalis Vasileiadis, Rayyan Zahid" />
-  <meta property="og:title" content="ClawCamp — Agent Orchestration · Context Engineering · Meta Prompting" />
+  <meta property="og:title" content="ClawCamp · Agent Orchestration · Context Engineering · Meta Prompting" />
   <meta property="og:description" content="The claw is the law. Molt your context. Compile your prompts. Ship agents that don't lie about deleting your database." />
   <meta property="og:type" content="website" />
 
@@ -57,8 +57,7 @@
         </div>
         <h1 class="slide__title slide__title--massive reveal">
           AGENT<br />
-          ORCHES<span class="accent-red">—</span><br />
-          TRATION
+          ORCHESTRATION
         </h1>
         <p class="slide__title reveal" style="font-size: var(--type-headline-room); font-weight: 400; line-height: 1; letter-spacing: -0.02em;">
           <span class="accent-gold">Context Engineering</span>
@@ -132,10 +131,9 @@
     <!-- ===================================================== -->
     <section class="slide slide--title">
       <div class="hero">
-        <p class="slide__eyebrow reveal">First — the input</p>
+        <p class="slide__eyebrow reveal">First · the input</p>
         <h1 class="slide__title slide__title--massive reveal">
-          CON<span class="accent-red">—</span><br/>
-          TEXT.
+          <span class="accent-red">CONTEXT.</span>
         </h1>
         <p class="reveal" style="font-family: var(--font-brutalist); font-size: var(--type-subhead-room); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent-2); margin-top: 1.5rem;">
           Molt your context.
@@ -150,7 +148,7 @@
     <!-- ===================================================== -->
     <section class="slide slide--pre">
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — context engineering</span>
+        <strong>PREVIEW</strong> <span>Up next ·context engineering</span>
       </div>
       <div class="ember-stage ember-stage--scatter" data-ember-count="55" data-ember-spread="95">
         <div class="ember-stage__focal"><span class="focal-point focal-point--tiny"></span></div>
@@ -181,15 +179,15 @@
           <blockquote class="quote reveal">
             "The delicate art and science of filling the context window with
             <span class="accent-gold">just the right information</span> for the next step."
-            <span class="quote__source">— Andrej Karpathy · Jun 2025</span>
+            <span class="quote__source">Andrej Karpathy · Jun 2025</span>
           </blockquote>
           <blockquote class="quote reveal" style="font-size: var(--type-subhead-room); color: var(--color-muted);">
             "Becoming the most important skill an AI engineer can develop."
-            <span class="quote__source">— Harrison Chase · LangChain</span>
+            <span class="quote__source">Harrison Chase · LangChain</span>
           </blockquote>
           <blockquote class="quote reveal" style="font-size: var(--type-subhead-room); color: var(--color-muted);">
             "Find the smallest possible set of <span class="accent-red">high-signal</span> tokens."
-            <span class="quote__source">— Anthropic Engineering</span>
+            <span class="quote__source">Anthropic Engineering</span>
           </blockquote>
         </div>
       </div>
@@ -200,7 +198,7 @@
     <!-- ===================================================== -->
     <section class="slide slide--pre">
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — context rot</span>
+        <strong>PREVIEW</strong> <span>Up next ·context rot</span>
       </div>
       <div class="ember-stage" data-ember-count="40">
         <div class="ember-stage__focal"><span class="focal-bar"></span></div>
@@ -220,7 +218,7 @@
             is real.
           </h2>
           <p class="slide__body slide__body--wide reveal">
-            Every frontier model — Claude, GPT, Gemini, Qwen —
+            Every frontier model, Claude, GPT, Gemini, Qwen,
             <strong>degrades before hitting the window limit.</strong>
           </p>
           <p class="slide__body slide__body--wide reveal" style="color: var(--color-muted);">
@@ -277,7 +275,7 @@
     <!-- ===================================================== -->
     <section class="slide slide--pre">
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — failure modes</span>
+        <strong>PREVIEW</strong> <span>Up next ·failure modes</span>
       </div>
       <div class="ember-stage" data-ember-count="44" data-ember-mode="fracture">
         <div class="focal-cracks"><span></span><span></span><span></span><span></span></div>
@@ -332,7 +330,7 @@
     <!-- ===================================================== -->
     <section class="slide slide--pre">
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — three moves</span>
+        <strong>PREVIEW</strong> <span>Up next ·three moves</span>
       </div>
       <div class="ember-stage" data-ember-count="40" data-ember-targets="50%,12%">
         <div class="ember-stage__focal"><span class="focal-chevron"></span></div>
@@ -385,14 +383,23 @@
     </section>
 
     <!-- ===================================================== -->
-    <!-- PRE-SLIDE · Caveman compression (ember → tight knot)   -->
+    <!-- PRE-SLIDE · Caveman — compression visualized.           -->
+    <!-- Dashed outline = the original verbose container;         -->
+    <!-- small bright bar inside = the compressed result.         -->
+    <!-- Labels "82" (struck through) and "13" show the delta.    -->
     <!-- ===================================================== -->
     <section class="slide slide--pre">
       <div class="pre__chip">
         <strong>PREVIEW</strong> <span>Move 01 · compress</span>
       </div>
-      <div class="ember-stage" data-ember-count="44" data-ember-targets="50%,50%">
-        <div class="ember-stage__focal"><span class="focal-knot"></span></div>
+      <div class="ember-stage" data-ember-count="40" data-ember-targets="9%,50% 11%,50% 13%,50% 15%,50% 17%,50% 19%,50% 21%,50%">
+        <div class="ember-stage__focal">
+          <div class="focal-compress">
+            <span class="focal-compress__label-full">82 tokens</span>
+            <span class="focal-compress__label-tight">13</span>
+            <div class="focal-compress__bar"></div>
+          </div>
+        </div>
       </div>
       <p class="pre__caption">Fewer tokens. Same meaning.</p>
     </section>
@@ -415,8 +422,8 @@
           <p class="slide__body slide__body--wide reveal" style="color: var(--color-muted); max-width: 34ch;">
             Drop articles, filler, hedging, pleasantries.<br/>
             Keep facts, verbs, code.<br/>
-            The model's reasoning is unchanged —
-            only the <em>speech</em> compresses.
+            The model's reasoning is unchanged.
+            Only the <em>speech</em> compresses.
           </p>
         </div>
         <div class="stack">
@@ -427,22 +434,29 @@
           <blockquote class="quote reveal" style="font-size: var(--type-body-room); color: var(--color-muted); margin-top: 0.5rem;">
             ~65% average output reduction across real tasks.
             More headroom before compaction. Cheaper subagent chains.
-            <span class="quote__source">— github.com/juliusbrussee/caveman</span>
+            <span class="quote__source">github.com/juliusbrussee/caveman</span>
           </blockquote>
         </div>
       </div>
     </section>
 
     <!-- ===================================================== -->
-    <!-- PRE-SLIDE · Subagent isolation (ember → split)         -->
+    <!-- PRE-SLIDE · Subagent isolation — fork visualized.        -->
+    <!-- Parent: big dashed chaos-filled circle. Arrow.           -->
+    <!-- Child: small bright solid circle (clean fresh shell).    -->
+    <!-- Most embers crowd parent, a handful arrive at child.     -->
     <!-- ===================================================== -->
     <section class="slide slide--pre">
       <div class="pre__chip">
         <strong>PREVIEW</strong> <span>Move 02 · isolate</span>
       </div>
-      <div class="ember-stage" data-ember-count="40" data-ember-targets="38%,50% 38%,50% 38%,50% 38%,50% 66%,50%">
+      <div class="ember-stage" data-ember-count="44" data-ember-targets="30%,45% 28%,55% 32%,48% 29%,52% 31%,43% 27%,50% 33%,54% 30%,50% 70%,50%">
         <div class="ember-stage__focal">
-          <div class="focal-split"><span></span><span></span></div>
+          <div class="focal-fork">
+            <span class="focal-fork__parent"></span>
+            <span class="focal-fork__arrow">&gt;</span>
+            <span class="focal-fork__child"></span>
+          </div>
         </div>
       </div>
       <p class="pre__caption">Fork a clean shell.</p>
@@ -479,15 +493,16 @@
     </section>
 
     <!-- ===================================================== -->
-    <!-- PRE-SLIDE · Hidden tax — container 80% filled.           -->
-    <!-- Embers flow INTO the filled portion. The empty 20% on    -->
-    <!-- the right is all the room you have left for actual work. -->
+    <!-- PRE-SLIDE · Hidden tax, container 80% filled.            -->
+    <!-- Embers converge INSIDE the filled 80% band, from left     -->
+    <!-- edge to ~67% of stage (end of fill). The empty right 20%  -->
+    <!-- gap labelled "you" is all the room left for actual work.  -->
     <!-- ===================================================== -->
     <section class="slide slide--pre">
       <div class="pre__chip">
         <strong>PREVIEW</strong> <span>Before you even type</span>
       </div>
-      <div class="ember-stage" data-ember-count="44" data-ember-targets="10%,50% 18%,50% 26%,50% 34%,50% 42%,50% 50%,50% 58%,50% 66%,50% 74%,50%">
+      <div class="ember-stage" data-ember-count="44" data-ember-targets="22%,45% 26%,55% 30%,48% 34%,52% 38%,45% 42%,55% 46%,48% 50%,52% 54%,45% 58%,55% 62%,48% 66%,52%">
         <div class="ember-stage__focal">
           <div class="focal-container">
             <div class="focal-container__fill"></div>
@@ -508,8 +523,8 @@
           The <span class="accent-red">hidden tax.</span>
         </h2>
         <p class="slide__body slide__body--wide reveal">
-          MCPs, skills, <code style="font-family: var(--font-brutalist); color: var(--color-accent-2);">CLAUDE.md</code> —
-          all load <strong>before your first message.</strong>
+          MCPs, skills, <code style="font-family: var(--font-brutalist); color: var(--color-accent-2);">CLAUDE.md</code>.
+          All load <strong>before your first message.</strong>
         </p>
 
         <div class="moves-grid reveal" style="grid-template-columns: repeat(3, 1fr); margin-top: 1rem;">
@@ -528,8 +543,8 @@
             <div class="move__name">loads on demand</div>
             <p class="move__desc">
               Skills inject only when invoked.<br/>
-              <strong>Prefer skills over MCPs</strong> for rarely-used tools —
-              same capability, zero baseline cost.
+              <strong>Prefer skills over MCPs</strong> for rarely-used tools.
+              Same capability, zero baseline cost.
             </p>
           </div>
           <div class="move">
@@ -556,11 +571,10 @@
     <!-- ===================================================== -->
     <section class="slide slide--title">
       <div class="hero">
-        <p class="slide__eyebrow reveal">Next — the prompts</p>
+        <p class="slide__eyebrow reveal">Next · the prompts</p>
         <h1 class="slide__title slide__title--massive reveal">
           META<br/>
-          PROMPT<span class="accent-red">—</span><br/>
-          ING.
+          <span class="accent-red">PROMPTING.</span>
         </h1>
         <p class="reveal" style="font-family: var(--font-brutalist); font-size: var(--type-subhead-room); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent-2); margin-top: 1.5rem;">
           Compile your prompts.
@@ -569,14 +583,19 @@
     </section>
 
     <!-- ===================================================== -->
-    <!-- PRE-SLIDE · Meta prompting (ember → nested)             -->
+    <!-- PRE-SLIDE · Meta prompting — infinity loop.              -->
+    <!-- Two pulsing rings forming an infinity symbol. Prompts    -->
+    <!-- generating prompts generating prompts. Self-referential. -->
+    <!-- Embers converge to the centers of the two lobes.         -->
     <!-- ===================================================== -->
     <section class="slide slide--pre">
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — meta prompting</span>
+        <strong>PREVIEW</strong> <span>Up next ·meta prompting</span>
       </div>
-      <div class="ember-stage" data-ember-count="40">
-        <div class="ember-stage__focal"><span class="focal-nested"></span></div>
+      <div class="ember-stage" data-ember-count="40" data-ember-targets="40%,50% 60%,50%">
+        <div class="ember-stage__focal">
+          <div class="focal-infinity"><span></span><span></span></div>
+        </div>
       </div>
       <p class="pre__caption">Prompts writing prompts.</p>
     </section>
@@ -598,7 +617,7 @@
           </p>
           <blockquote class="quote reveal" style="font-size: var(--type-subhead-room); color: var(--color-muted); max-width: 32ch;">
             "DSPy is my context engineering tool of choice."
-            <span class="quote__source">— Tobi Lütke · Shopify CEO</span>
+            <span class="quote__source">Tobi Lütke · Shopify CEO</span>
           </blockquote>
         </div>
         <div class="stack">
@@ -638,10 +657,9 @@
     <!-- ===================================================== -->
     <section class="slide slide--title">
       <div class="hero">
-        <p class="slide__eyebrow reveal">Now — the loop &amp; the library</p>
+        <p class="slide__eyebrow reveal">Now · the loop &amp; the library</p>
         <h1 class="slide__title slide__title--massive reveal">
-          BUI<span class="accent-red">—</span><br/>
-          LD.
+          <span class="accent-red">BUILD.</span>
         </h1>
         <p class="reveal" style="font-family: var(--font-brutalist); font-size: var(--type-subhead-room); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent-2); margin-top: 1.5rem;">
           Ship the agent.
@@ -650,14 +668,25 @@
     </section>
 
     <!-- ===================================================== -->
-    <!-- PRE-SLIDE · GSD (ember → loop)                          -->
+    <!-- PRE-SLIDE · GSD — cycle with orbiting marker.            -->
+    <!-- Four nodes at N/E/S/W on a ring. A bright marker         -->
+    <!-- orbits continuously, closing the loop with every pass.   -->
+    <!-- Embers converge to the four cardinal nodes.              -->
     <!-- ===================================================== -->
     <section class="slide slide--pre">
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — GSD</span>
+        <strong>PREVIEW</strong> <span>Up next ·GSD</span>
       </div>
-      <div class="ember-stage" data-ember-count="40">
-        <div class="ember-stage__focal"><span class="focal-loop"></span></div>
+      <div class="ember-stage" data-ember-count="40" data-ember-targets="50%,28% 70%,50% 50%,72% 30%,50%">
+        <div class="ember-stage__focal">
+          <div class="focal-cycle">
+            <span class="focal-cycle__node focal-cycle__node--n"></span>
+            <span class="focal-cycle__node focal-cycle__node--e"></span>
+            <span class="focal-cycle__node focal-cycle__node--s"></span>
+            <span class="focal-cycle__node focal-cycle__node--w"></span>
+            <span class="focal-cycle__orbit"></span>
+          </div>
+        </div>
       </div>
       <p class="pre__caption">Close the loop.</p>
     </section>
@@ -701,7 +730,7 @@
             <blockquote class="quote" style="font-size: var(--type-subhead-room); max-width: 40ch;">
               "Your main context stays at <span class="accent-gold">30–40%.</span>
               The work happens in <span class="accent-red">fresh subagent contexts.</span>"
-              <span class="quote__source">— GSD README</span>
+              <span class="quote__source">GSD README</span>
             </blockquote>
           </div>
           <div class="stack">
@@ -726,7 +755,7 @@ npx get-shit-done-cc@latest</div>
     <!-- ===================================================== -->
     <section class="slide slide--pre">
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — Agent SDK</span>
+        <strong>PREVIEW</strong> <span>Up next ·Agent SDK</span>
       </div>
       <div class="ember-stage" data-ember-count="36">
         <div class="ember-stage__focal"><span class="focal-brace">{ }</span></div>
@@ -768,18 +797,18 @@ asyncio.run(main())</div>
           <div class="stack">
             <p class="slide__eyebrow" style="color: var(--color-muted);">Primitives you compose</p>
             <ul class="bullet-list bullet-list--bare" style="font-size: var(--type-body-room);">
-              <li><div><strong style="color: var(--color-accent-1);">Tools</strong> — Read, Edit, Bash, Glob, Grep, WebSearch, MCP servers</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Subagents</strong> — spawn specialists, isolate context</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Hooks</strong> — PreToolUse, PostToolUse, Stop — audit &amp; gate</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Sessions</strong> — persist, resume, fork</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Your Claude Code skills</strong> — via <code style="font-family:var(--font-brutalist); color:var(--color-accent-2);">setting_sources=["project"]</code></div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Tools</strong>: Read, Edit, Bash, Glob, Grep, WebSearch, MCP servers</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Subagents</strong>: spawn specialists, isolate context</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Hooks</strong>: PreToolUse, PostToolUse, Stop. Audit &amp; gate.</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Sessions</strong>: persist, resume, fork</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Your Claude Code skills</strong>: via <code style="font-family:var(--font-brutalist); color:var(--color-accent-2);">setting_sources=["project"]</code></div></li>
             </ul>
           </div>
         </div>
 
         <p class="slide__body slide__body--wide reveal" style="margin-top: 2rem; font-size: var(--type-subhead-room); max-width: 58ch;">
           <strong class="accent-gold">Beginner:</strong> first agent in 12 lines.
-          <strong class="accent-gold">Intermediate:</strong> production multi-agent systems in CI/CD — using the same engine.
+          <strong class="accent-gold">Intermediate:</strong> production multi-agent systems in CI/CD, using the same engine.
         </p>
       </div>
     </section>
@@ -830,7 +859,7 @@ asyncio.run(main())</div>
       <span class="register-mark --br"></span>
 
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — the thesis</span>
+        <strong>PREVIEW</strong> <span>Up next ·the thesis</span>
       </div>
 
       <div class="pre-b__col">
@@ -866,7 +895,7 @@ asyncio.run(main())</div>
             of the model.
             <br /><br />
             It's a <span style="color: var(--color-accent-1); font-style: normal; font-weight: 700;">stack of primitives</span> you build around it.
-            <span class="quote__source">— the thesis of Part 02</span>
+            <span class="quote__source">the thesis of Part 02</span>
           </blockquote>
           <p class="slide__body slide__body--wide reveal" style="color: var(--color-muted); font-size: var(--type-subhead-room);">
             Six primitives. Stack them and your agent becomes boring.<br />
@@ -884,7 +913,7 @@ asyncio.run(main())</div>
       <span class="register-mark --br"></span>
 
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 01</span>
+        <strong>PREVIEW</strong> <span>Up next ·primitive 01</span>
       </div>
 
       <div class="pre-b__row">
@@ -918,14 +947,14 @@ asyncio.run(main())</div>
           on <span class="accent-red">shapes.</span>
         </h2>
         <p class="slide__body slide__body--wide reveal" style="font-size: var(--type-subhead-room); max-width: 48ch;">
-          <em style="font-style: italic; color: var(--color-muted);">"Poka-yoke your tools. Change the arguments so that it is harder to make mistakes."</em> — <span style="color: var(--color-accent-1); font-weight: 700;">Anthropic</span>
+          <em style="font-style: italic; color: var(--color-muted);">"Poka-yoke your tools. Change the arguments so that it is harder to make mistakes."</em> <span style="color: var(--color-accent-1); font-weight: 700;">Anthropic</span>
         </p>
 
         <div class="two-col reveal" style="margin-top: 1.5rem; align-items: start;">
           <div class="stack">
-            <p class="slide__eyebrow" style="color: var(--color-accent-2);">⨯ Before — shape roulette</p>
+            <p class="slide__eyebrow" style="color: var(--color-accent-2);">⨯ Before · shape roulette</p>
             <div class="code-block">
-<span class="com"># returns ??? — agent guesses</span>
+<span class="com"># returns ???  agent guesses</span>
 data = telegram.fetch_unread(50)
 <span class="kw">if</span> data:
     <span class="kw">for</span> m <span class="kw">in</span> data.get(<span class="str">"msgs"</span>, []):
@@ -934,7 +963,7 @@ data = telegram.fetch_unread(50)
 <span class="com"># silent None on auth expired</span></div>
           </div>
           <div class="stack">
-            <p class="slide__eyebrow" style="color: #006b3c;">✓ After — total function</p>
+            <p class="slide__eyebrow" style="color: #006b3c;">✓ After · total function</p>
             <div class="code-block">
 <span class="kw">from</span> kernel.capabilities.telegram <span class="kw">import</span> get_unread
 
@@ -960,7 +989,7 @@ r = <span class="fn">get_unread</span>(limit=<span class="str">50</span>)
       <span class="register-mark --br"></span>
 
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 02</span>
+        <strong>PREVIEW</strong> <span>Up next ·primitive 02</span>
       </div>
 
       <div class="pre-b__row">
@@ -1020,7 +1049,7 @@ r = <span class="fn">get_unread</span>(limit=<span class="str">50</span>)
             </div>
           </div>
           <p class="reveal" style="font-family: var(--font-brutalist); font-size: var(--type-caption-room); color: var(--color-muted); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-top: 1rem;">
-            "No silent retries. Classify and surface." — kernel design rule
+            "No silent retries. Classify and surface." · kernel design rule
           </p>
         </div>
       </div>
@@ -1034,7 +1063,7 @@ r = <span class="fn">get_unread</span>(limit=<span class="str">50</span>)
       <span class="register-mark --br"></span>
 
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 03</span>
+        <strong>PREVIEW</strong> <span>Up next ·primitive 03</span>
       </div>
 
       <div class="pre-b__stream">
@@ -1075,10 +1104,10 @@ r = <span class="fn">get_unread</span>(limit=<span class="str">50</span>)
           <div class="stack">
             <p class="slide__eyebrow" style="color: var(--color-muted);">What the dashboard surfaces</p>
             <ul class="bullet-list bullet-list--bare" style="font-size: var(--type-body-room);">
-              <li><div><strong style="color: var(--color-accent-1);">Per-verb success rate</strong> — which tools are flaky</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">p50 / p95 latency</strong> — which tools hog the turn</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Error distribution</strong> — auth vs rate vs transient</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Agent feedback loop</strong> — agents can query their own history</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Per-verb success rate</strong>: which tools are flaky</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">p50 / p95 latency</strong>: which tools hog the turn</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Error distribution</strong>: auth vs rate vs transient</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Agent feedback loop</strong>: agents can query their own history</div></li>
             </ul>
             <p style="font-family: var(--font-brutalist); font-size: var(--type-caption-room); color: var(--color-muted); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-top: 0.75rem;">
               Fire-and-forget. A logging failure never breaks a verb.
@@ -1096,7 +1125,7 @@ r = <span class="fn">get_unread</span>(limit=<span class="str">50</span>)
       <span class="register-mark --br"></span>
 
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 04</span>
+        <strong>PREVIEW</strong> <span>Up next ·primitive 04</span>
       </div>
 
       <div class="pre-b__row">
@@ -1146,8 +1175,8 @@ r = <span class="fn">get_unread</span>(limit=<span class="str">50</span>)
 }</div>
           <p class="reveal" style="font-family: var(--font-expressive); font-size: var(--type-body-room); color: var(--color-fg); font-weight: 300; margin-top: 1rem; max-width: 40ch;">
             Real hooks shipping in this repo:<br />
-            <strong style="color: var(--color-accent-1);">atomic-commit-gate</strong> — no session-end with a dirty tree.<br />
-            <strong style="color: var(--color-accent-1);">require-agent-name</strong> — every Agent call must be tagged.
+            <strong style="color: var(--color-accent-1);">atomic-commit-gate</strong>: no session-end with a dirty tree.<br />
+            <strong style="color: var(--color-accent-1);">require-agent-name</strong>: every Agent call must be tagged.
           </p>
         </div>
       </div>
@@ -1161,7 +1190,7 @@ r = <span class="fn">get_unread</span>(limit=<span class="str">50</span>)
       <span class="register-mark --br"></span>
 
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 05a</span>
+        <strong>PREVIEW</strong> <span>Up next ·primitive 05a</span>
       </div>
 
       <div class="pre-b__merge">
@@ -1212,7 +1241,7 @@ r = <span class="fn">get_unread</span>(limit=<span class="str">50</span>)
 
         <div class="two-col reveal" style="margin-top: 1.75rem; align-items: start;">
           <div class="stack">
-            <p class="slide__eyebrow" style="color: var(--color-muted);">linkedin/nav.py — the nav abstraction</p>
+            <p class="slide__eyebrow" style="color: var(--color-muted);">linkedin/nav.py · the nav abstraction</p>
             <div class="code-block">
 <span class="kw">def</span> <span class="fn">goto_messaging</span>(cdp) -&gt; <span class="kw">bool</span>:
     cdp.navigate(MESSAGING_URL)
@@ -1231,12 +1260,12 @@ r = <span class="fn">get_unread</span>(limit=<span class="str">50</span>)
           <div class="stack">
             <blockquote class="quote" style="font-size: var(--type-subhead-room); max-width: 32ch;">
               "Playwright drives the browser.<br />DevTools MCP <em style="color: var(--color-accent-1); font-style: normal; font-weight: 700;">debugs</em> one."
-              <span class="quote__source">— Steve Kinney</span>
+              <span class="quote__source">Steve Kinney</span>
             </blockquote>
             <ul class="bullet-list bullet-list--bare" style="font-size: var(--type-body-room);">
-              <li><div><strong style="color: var(--color-accent-1);">Session reuse</strong> — attach to logged-in Chrome</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Session reuse</strong>: attach to logged-in Chrome</div></li>
               <li><div><strong style="color: var(--color-accent-1);">Nav is the single source</strong> for selectors</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Two-phase waits</strong> — route then DOM, not sleep(2)</div></li>
+              <li><div><strong style="color: var(--color-accent-1);">Two-phase waits</strong>: route then DOM, not sleep(2)</div></li>
               <li><div><strong style="color: var(--color-muted);">Fallback: Playwright MCP for weird JS flows</strong></div></li>
             </ul>
           </div>
@@ -1252,7 +1281,7 @@ r = <span class="fn">get_unread</span>(limit=<span class="str">50</span>)
       <span class="register-mark --br"></span>
 
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 05b</span>
+        <strong>PREVIEW</strong> <span>Up next ·primitive 05b</span>
       </div>
 
       <div class="pre-b__row">
@@ -1345,7 +1374,7 @@ sleep = random(<span class="str">0</span>, min(cap, base * <span class="str">2</
       <span class="register-mark --br"></span>
 
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 06</span>
+        <strong>PREVIEW</strong> <span>Up next ·primitive 06</span>
       </div>
 
       <div class="pre-b__row">
@@ -1399,14 +1428,14 @@ sleep = random(<span class="str">0</span>, min(cap, base * <span class="str">2</
         <div class="two-col reveal" style="margin-top: 2rem; align-items: center;">
           <div class="stack">
             <p class="slide__body slide__body--wide" style="font-size: var(--type-subhead-room); max-width: 44ch;">
-              Don't let the agent drift autonomously for weeks — it converges to <em style="color: var(--color-accent-2); font-style: normal;">garbage.</em>
+              Don't let the agent drift autonomously for weeks. It converges to <em style="color: var(--color-accent-2); font-style: normal;">garbage.</em>
               Start tight. Widen the loop as <strong style="color: var(--color-accent-1);">trust compounds.</strong>
             </p>
           </div>
           <div class="stack">
             <blockquote class="quote" style="font-size: var(--type-subhead-room); max-width: 38ch;">
               "The most successful AI products aren't purely agentic loops, but combine deterministic code with <em style="color: var(--color-accent-1); font-style: normal; font-weight: 700;">strategically placed LLM decision points.</em>"
-              <span class="quote__source">— Dexter Horthy · 12-Factor Agents</span>
+              <span class="quote__source">Dexter Horthy · 12-Factor Agents</span>
             </blockquote>
             <p class="slide__body slide__body--wide" style="font-size: var(--type-subhead-room); max-width: 34ch; margin-top: 1rem;">
               You're not training the model.<br />
@@ -1425,7 +1454,7 @@ sleep = random(<span class="str">0</span>, min(cap, base * <span class="str">2</
       <span class="register-mark --br"></span>
 
       <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — synthesis</span>
+        <strong>PREVIEW</strong> <span>Up next ·synthesis</span>
       </div>
 
       <div class="pre-b__grid">
@@ -1505,7 +1534,7 @@ sleep = random(<span class="str">0</span>, min(cap, base * <span class="str">2</
         </h2>
         <p class="slide__body slide__body--wide reveal" style="font-size: var(--type-subhead-room); max-width: 44ch; margin-top: 1rem;">
           Find a real pain.<br />
-          Instrument it — <strong>GSD</strong>, the <strong>Agent SDK</strong>, or your own kernel.<br />
+          Instrument it. <strong>GSD</strong>, the <strong>Agent SDK</strong>, or your own kernel.<br />
           Get <em>Michalis</em> &amp; <em>Rayyan</em> 1:1.
         </p>
 
@@ -1567,7 +1596,28 @@ sleep = random(<span class="str">0</span>, min(cap, base * <span class="str">2</
           </div>
         </div>
 
-        <div class="cta-strip reveal" style="margin-top: 3rem; border-color: var(--color-accent-2);">
+        <div class="reveal connect-block" style="margin-top: 2.5rem;">
+          <p class="slide__eyebrow" style="color: var(--color-accent-2);">Stay in the loop</p>
+          <div class="connect-grid">
+            <a class="connect-card" href="https://www.vibecodingnights.com/" target="_blank" rel="noopener">
+              <span class="connect-card__tag">The event</span>
+              <span class="connect-card__name">Vibe Coding Nights</span>
+              <span class="connect-card__url">vibecodingnights.com</span>
+            </a>
+            <a class="connect-card" href="https://www.linkedin.com/in/michalis-vasileiadis" target="_blank" rel="noopener">
+              <span class="connect-card__tag">Facilitator</span>
+              <span class="connect-card__name">Michalis Vasileiadis</span>
+              <span class="connect-card__url">linkedin.com/in/michalis-vasileiadis</span>
+            </a>
+            <a class="connect-card" href="https://www.linkedin.com/in/rayyanzahid" target="_blank" rel="noopener">
+              <span class="connect-card__tag">Co-facilitator</span>
+              <span class="connect-card__name">Rayyan Zahid</span>
+              <span class="connect-card__url">linkedin.com/in/rayyanzahid</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="cta-strip reveal" style="margin-top: 2rem; border-color: var(--color-accent-2);">
           <p class="cta-strip__text" style="color: var(--color-muted);">
             <span class="accent-gold">ClawCamp · Vibe Coding Nights</span><br />
             By Michalis Vasileiadis &amp; Rayyan Zahid · The claw is the law

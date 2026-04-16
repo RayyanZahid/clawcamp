@@ -714,6 +714,79 @@ body {
   border-bottom-color: var(--color-accent-2);
 }
 
+/* ---------- Connect block (sources slide) ---------- */
+.connect-block { display: grid; gap: 1rem; }
+
+.connect-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+
+.connect-card {
+  display: grid;
+  gap: 0.4rem;
+  padding: clamp(1rem, 1.8vw, 1.5rem) clamp(1.1rem, 2vw, 1.75rem);
+  border: 1.5px solid var(--color-border);
+  text-decoration: none;
+  transition:
+    border-color var(--dur-snap) var(--ease-out-expo),
+    background var(--dur-snap) var(--ease-out-expo),
+    transform var(--dur-snap) var(--ease-out-expo);
+  position: relative;
+}
+
+.connect-card:hover {
+  border-color: var(--color-accent-1);
+  background: rgba(255, 61, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+.connect-card__tag {
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--color-accent-2);
+}
+
+.connect-card__name {
+  font-family: var(--font-monument);
+  font-size: clamp(1.2rem, 1.75vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--color-fg);
+  letter-spacing: -0.01em;
+}
+
+.connect-card__url {
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-accent-1);
+  word-break: break-all;
+}
+
+.connect-card::after {
+  content: '↗';
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  font-family: var(--font-brutalist);
+  font-size: 1.2rem;
+  color: var(--color-muted);
+  transition: color var(--dur-snap) var(--ease-out-expo), transform var(--dur-snap) var(--ease-out-expo);
+}
+
+.connect-card:hover::after {
+  color: var(--color-accent-1);
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 900px) {
+  .connect-grid { grid-template-columns: 1fr; }
+}
+
 /* ---------- Ambient glow for blaze mood ---------- */
 .slide--title::before {
   content: '';
@@ -1745,6 +1818,199 @@ body {
   box-shadow:
     0 0 20px rgba(255, 61, 0, 0.8),
     0 0 50px rgba(255, 61, 0, 0.4);
+}
+
+/* Compression box — caveman pre-slide.
+   Dashed outline shows original token count, tight inner bar shows compressed. */
+.focal-compress {
+  position: relative;
+  width: clamp(14rem, 32vw, 28rem);
+  height: clamp(2.2rem, 4vw, 3.5rem);
+  border: 1.5px dashed rgba(255, 61, 0, 0.45);
+  display: flex;
+  align-items: center;
+  padding-left: 6%;
+}
+.focal-compress__label-full,
+.focal-compress__label-tight {
+  position: absolute;
+  top: -1.4rem;
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+.focal-compress__label-full {
+  left: 0;
+  color: var(--color-muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(255, 61, 0, 0.6);
+  text-decoration-thickness: 1.5px;
+}
+.focal-compress__label-tight {
+  left: 6%;
+  color: var(--color-accent-1);
+  font-weight: 700;
+  transform: translateX(clamp(2rem, 5vw, 4rem));
+}
+.focal-compress__bar {
+  width: 16%;
+  height: 55%;
+  background: linear-gradient(90deg, #ffab00, #ff3d00);
+  border-radius: 2px;
+  box-shadow:
+    0 0 20px rgba(255, 61, 0, 0.7),
+    inset 0 0 8px rgba(255, 245, 214, 0.4);
+}
+
+/* Fork — subagent isolation.
+   Big dashed chaotic parent circle, small solid bright child circle. */
+.focal-fork {
+  display: flex;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.focal-fork__parent {
+  position: relative;
+  width: clamp(5.5rem, 11vw, 9.5rem);
+  height: clamp(5.5rem, 11vw, 9.5rem);
+  border: 2px dashed rgba(255, 61, 0, 0.6);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 61, 0, 0.15), rgba(255, 171, 0, 0.05) 60%, transparent);
+}
+.focal-fork__parent::before,
+.focal-fork__parent::after {
+  /* scribbled chaos lines inside the parent */
+  content: '';
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  top: 40%;
+  height: 2px;
+  background: rgba(255, 61, 0, 0.35);
+  border-radius: 2px;
+}
+.focal-fork__parent::after {
+  top: 60%;
+  left: 22%;
+  right: 25%;
+  background: rgba(255, 171, 0, 0.4);
+}
+.focal-fork__arrow {
+  color: var(--color-accent-1);
+  font-family: var(--font-brutalist);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 0 12px rgba(255, 61, 0, 0.7);
+}
+.focal-fork__child {
+  width: clamp(3rem, 6vw, 5.5rem);
+  height: clamp(3rem, 6vw, 5.5rem);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff5d6, #ffe8b5 25%, #ffab00 60%, #ff3d00 90%);
+  box-shadow:
+    0 0 25px rgba(255, 171, 0, 0.75),
+    0 0 50px rgba(255, 61, 0, 0.4),
+    inset 0 0 10px rgba(255, 255, 255, 0.15);
+  position: relative;
+}
+.focal-fork__child::after {
+  /* "clean" halo — a single bright arc */
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 245, 214, 0.6);
+}
+
+/* Infinity — meta prompting. Prompts writing prompts = self-referential loop. */
+.focal-infinity {
+  width: clamp(10rem, 22vw, 18rem);
+  height: clamp(5rem, 11vw, 9rem);
+  position: relative;
+}
+.focal-infinity span {
+  position: absolute;
+  top: 50%;
+  width: clamp(5rem, 11vw, 9rem);
+  height: clamp(5rem, 11vw, 9rem);
+  border: 3px solid var(--color-accent-1);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  box-shadow:
+    0 0 25px rgba(255, 61, 0, 0.55),
+    inset 0 0 15px rgba(255, 171, 0, 0.25);
+  animation: focal-infinity-pulse 3s var(--ease-in-out-sine) infinite;
+}
+.focal-infinity span:first-child {
+  left: 0;
+}
+.focal-infinity span:last-child {
+  right: 0;
+  animation-delay: 1.5s;
+  border-color: var(--color-accent-2);
+}
+@keyframes focal-infinity-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 61, 0, 0.4), inset 0 0 10px rgba(255, 171, 0, 0.2); }
+  50%      { box-shadow: 0 0 40px rgba(255, 61, 0, 0.8), inset 0 0 20px rgba(255, 171, 0, 0.4); }
+}
+
+/* Cycle — GSD. 4 nodes on a ring with an orbiting marker closing the loop. */
+.focal-cycle {
+  width: clamp(9rem, 18vw, 15rem);
+  height: clamp(9rem, 18vw, 15rem);
+  position: relative;
+  border: 2px solid var(--color-accent-1);
+  border-radius: 50%;
+  box-shadow:
+    0 0 25px rgba(255, 61, 0, 0.4),
+    inset 0 0 15px rgba(255, 171, 0, 0.15);
+}
+.focal-cycle__node {
+  position: absolute;
+  width: clamp(1rem, 2vw, 1.75rem);
+  height: clamp(1rem, 2vw, 1.75rem);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff5d6, #ffab00 35%, #ff3d00 75%);
+  box-shadow: 0 0 15px rgba(255, 171, 0, 0.8);
+  transform: translate(-50%, -50%);
+}
+.focal-cycle__node--n { top: 0;    left: 50%; }
+.focal-cycle__node--e { top: 50%;  left: 100%; }
+.focal-cycle__node--s { top: 100%; left: 50%; }
+.focal-cycle__node--w { top: 50%;  left: 0; }
+
+.focal-cycle__orbit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: cycle-spin 4s linear infinite;
+  transform-origin: center;
+}
+.focal-cycle__orbit::before {
+  content: '';
+  position: absolute;
+  top: -0.55rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff5d6, rgba(255, 245, 214, 0.1) 70%);
+  box-shadow:
+    0 0 20px #fff5d6,
+    0 0 40px #ffab00,
+    0 0 70px rgba(255, 61, 0, 0.6);
+}
+@keyframes cycle-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .focal-cycle__orbit { animation: none; }
 }
 
 /* -------------------- Shape-morph variants (Part 2 pre-slides) -------------------- */
