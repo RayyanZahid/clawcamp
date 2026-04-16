@@ -1345,6 +1345,164 @@ body {
 }
 .slide.--visible .pre-b__labels span { opacity: 1; transition-delay: 2400ms; }
 
+/* -------------------- Shape-morph variants (Part 2 pre-slides) -------------------- */
+/* All share the appear-then-resolve motion from preview B, vary the end state */
+
+/* Vertical stack (Reliability Gap — "Stack the primitives") */
+.pre-b__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+}
+.pre-b__col .pre-b__cell {
+  width: clamp(8rem, 16vw, 14rem);
+  height: clamp(1.25rem, 2.5vh, 2rem);
+}
+
+/* Log stream (Ledger) — thin horizontal lines stacked tight */
+.pre-b__stream {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: flex-start;
+}
+.pre-b__stream .pre-b__cell {
+  width: clamp(14rem, 30vw, 28rem);
+  height: clamp(0.7rem, 1.2vh, 1.1rem);
+}
+.pre-b__stream .pre-b__cell:nth-child(odd) { width: clamp(11rem, 24vw, 22rem); }
+.pre-b__stream .pre-b__cell:nth-child(4)  { width: clamp(16rem, 32vw, 30rem); }
+
+/* Grid (Synthesis — "All six") */
+.pre-b__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(0.75rem, 1.2vw, 1.5rem);
+}
+.pre-b__grid .pre-b__cell {
+  width: clamp(4.5rem, 8vw, 8rem);
+  height: clamp(2.25rem, 4vw, 4rem);
+}
+
+/* Gate variant — some pass, some get blocked */
+.pre-b__gate-bar {
+  width: 3px;
+  height: clamp(4.5rem, 8vw, 7rem);
+  background: var(--color-accent-2);
+  align-self: center;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 500ms var(--ease-out-expo);
+  box-shadow: 0 0 16px rgba(199, 46, 26, 0.4);
+}
+.slide.--visible .pre-b__gate-bar { opacity: 0.9; transition-delay: 900ms; }
+
+.pre-b__cell--blocked {
+  /* Override the 2nd resolve animation to fall away instead */
+}
+.slide.--visible .pre-b__cell--blocked {
+  animation:
+    pre-b-appear 600ms var(--ease-out-expo) forwards,
+    pre-b-fall-away 1000ms var(--ease-out-expo) forwards !important;
+}
+@keyframes pre-b-fall-away {
+  0%   { }
+  40%  { transform: translateY(0) rotate(0); opacity: 1; }
+  100% { transform: translateY(40%) rotate(-22deg); opacity: 0; border-radius: inherit; }
+}
+
+/* Merge variant (CDP — "One wire") */
+.pre-b__merge {
+  display: flex;
+  gap: clamp(0.75rem, 1.2vw, 1.5rem);
+  align-items: center;
+  justify-content: center;
+}
+.pre-b__merge .pre-b__cell--collapse {
+  /* handled below: same appear, then collapse on resolve */
+}
+.slide.--visible .pre-b__merge .pre-b__cell--collapse {
+  animation:
+    pre-b-appear 600ms var(--ease-out-expo) forwards,
+    pre-b-collapse 900ms var(--ease-spring) forwards !important;
+}
+@keyframes pre-b-collapse {
+  to { width: 0; opacity: 0; margin-left: 0; margin-right: 0; transform: scaleX(0); }
+}
+.slide.--visible .pre-b__merge .pre-b__cell--expand {
+  animation:
+    pre-b-appear 600ms var(--ease-out-expo) forwards,
+    pre-b-expand 900ms var(--ease-spring) forwards !important;
+}
+@keyframes pre-b-expand {
+  to {
+    width: clamp(18rem, 38vw, 32rem);
+    border-radius: 3px;
+    background: var(--color-accent-1);
+  }
+}
+
+/* POST highlight (APIs) — two cells resolve to gold */
+.slide.--visible .pre-b__cell--post {
+  animation:
+    pre-b-appear 600ms var(--ease-out-expo) forwards,
+    pre-b-resolve-gold 900ms var(--ease-spring) forwards !important;
+}
+@keyframes pre-b-resolve-gold {
+  to { border-radius: 2px; background: #e07b2d; }
+}
+
+/* HITL variant — 3 fade, 2 remain + translate to form a pair */
+.slide.--visible .pre-b__cell--fade {
+  animation:
+    pre-b-appear 600ms var(--ease-out-expo) forwards,
+    pre-b-hitl-fade 900ms var(--ease-out-expo) forwards !important;
+}
+@keyframes pre-b-hitl-fade {
+  to { opacity: 0; transform: scale(0.5); }
+}
+.slide.--visible .pre-b__cell--hitl-agent {
+  animation:
+    pre-b-appear 600ms var(--ease-out-expo) forwards,
+    pre-b-hitl-agent 900ms var(--ease-spring) forwards !important;
+}
+@keyframes pre-b-hitl-agent {
+  to { border-radius: 2px; background: var(--color-accent-1); transform: translateX(55%); }
+}
+.slide.--visible .pre-b__cell--hitl-human {
+  animation:
+    pre-b-appear 600ms var(--ease-out-expo) forwards,
+    pre-b-hitl-human 900ms var(--ease-spring) forwards !important;
+}
+@keyframes pre-b-hitl-human {
+  to { border-radius: 2px; background: var(--color-accent-2); transform: translateX(-55%); }
+}
+
+/* Labels — tiny text appearing below each cell after resolve */
+.pre-b__cell[data-label]::after {
+  content: attr(data-label);
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-brutalist);
+  font-size: var(--type-caption-room);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out-expo) 2200ms;
+}
+.pre-b__cell { position: relative; }
+.slide.--visible .pre-b__cell[data-label]::after { opacity: 1; }
+
+/* Override label color for highlighted cells */
+.slide.--visible .pre-b__cell--post[data-label]::after { color: #e07b2d; font-weight: 700; }
+.slide.--visible .pre-b__cell--hitl-agent[data-label]::after { color: var(--color-accent-1); font-weight: 700; }
+.slide.--visible .pre-b__cell--hitl-human[data-label]::after { color: var(--color-accent-2); font-weight: 700; }
+
 /* -------------------- VARIANT C — Socket / interface lock -------------------- */
 /* Four mismatched tiles drop. One fits. */
 
