@@ -71,7 +71,7 @@ body {
   padding:
     clamp(3.25rem, 5.5vh, 4.5rem)   /* top: clears top chrome */
     clamp(2.5rem, 5vw, 5.5rem)      /* sides */
-    clamp(5rem, 9vh, 7rem)          /* bottom: clears marquee + progress bar */
+    clamp(3rem, 5.5vh, 4.25rem)     /* bottom: just clears progress bar */
     clamp(2.5rem, 5vw, 5.5rem);
   display: grid;
   position: relative;
@@ -92,7 +92,7 @@ body {
     padding:
       clamp(2.75rem, 4.5vh, 3.75rem)
       clamp(2.25rem, 4.5vw, 5rem)
-      clamp(4.5rem, 7.5vh, 6rem)
+      clamp(2.5rem, 4vh, 3.5rem)
       clamp(2.25rem, 4.5vw, 5rem);
   }
 }
@@ -819,8 +819,8 @@ body {
 }
 .slide--paper .register-mark.--tl { top: 1.5rem; left: 1.5rem; }
 .slide--paper .register-mark.--tr { top: 1.5rem; right: 1.5rem; }
-.slide--paper .register-mark.--bl { bottom: 4.5rem; left: 1.5rem; }
-.slide--paper .register-mark.--br { bottom: 4.5rem; right: 1.5rem; }
+.slide--paper .register-mark.--bl { bottom: 3rem; left: 1.5rem; }
+.slide--paper .register-mark.--br { bottom: 3rem; right: 1.5rem; }
 
 /* Accent utilities re-bound for paper slides */
 .slide--paper .accent-red { color: var(--color-accent-2); }
