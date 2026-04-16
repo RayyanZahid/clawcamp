@@ -27,6 +27,27 @@
     </div>
   </div>
 
+  <!-- Marquee: "THE CLAW IS THE LAW" -->
+  <div class="marquee-band" aria-hidden="true">
+    <div class="marquee-band__track">
+      <!-- Double content for seamless loop -->
+      <span class="marquee-band__item">THE CLAW IS THE LAW</span>
+      <span class="marquee-band__item">MOLT YOUR CONTEXT</span>
+      <span class="marquee-band__item">COMPILE YOUR PROMPTS</span>
+      <span class="marquee-band__item">SHIP THE AGENT</span>
+      <span class="marquee-band__item">NEW SHELL · SAME SOUL</span>
+      <span class="marquee-band__item">CONTEXT IS A BUDGET</span>
+      <span class="marquee-band__item">WHY USE MANY TOKEN WHEN FEW TOKEN DO TRICK</span>
+      <span class="marquee-band__item">THE CLAW IS THE LAW</span>
+      <span class="marquee-band__item">MOLT YOUR CONTEXT</span>
+      <span class="marquee-band__item">COMPILE YOUR PROMPTS</span>
+      <span class="marquee-band__item">SHIP THE AGENT</span>
+      <span class="marquee-band__item">NEW SHELL · SAME SOUL</span>
+      <span class="marquee-band__item">CONTEXT IS A BUDGET</span>
+      <span class="marquee-band__item">WHY USE MANY TOKEN WHEN FEW TOKEN DO TRICK</span>
+    </div>
+  </div>
+
   <!-- Bottom chrome: progress + counter -->
   <div class="chrome">
     <div class="chrome__bottom">
@@ -128,7 +149,23 @@
     </section>
 
     <!-- ===================================================== -->
-    <!-- SLIDE 04 — WHAT IS CONTEXT ENGINEERING                 -->
+    <!-- SECTION OPENER — CONTEXT ENGINEERING                    -->
+    <!-- ===================================================== -->
+    <section class="slide slide--title">
+      <div class="hero">
+        <p class="slide__eyebrow reveal">First — the input</p>
+        <h1 class="slide__title slide__title--massive reveal">
+          CON<span class="accent-red">—</span><br/>
+          TEXT.
+        </h1>
+        <p class="reveal" style="font-family: var(--font-brutalist); font-size: var(--type-subhead-room); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent-2); margin-top: 1.5rem;">
+          Molt your context.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE — WHAT IS CONTEXT ENGINEERING                    -->
     <!-- ===================================================== -->
     <section class="slide">
       <div class="two-col">
@@ -310,7 +347,143 @@
     </section>
 
     <!-- ===================================================== -->
-    <!-- SLIDE 08 — META PROMPTING                              -->
+    <!-- SLIDE 08 — CAVEMAN COMPRESSION                         -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="two-col">
+        <div class="stack stack--center">
+          <p class="slide__eyebrow reveal">Move 01 · Compress, literally</p>
+          <h2 class="slide__title reveal">
+            Talk like<br/>
+            <span class="accent-red">caveman.</span>
+          </h2>
+          <p class="slide__body slide__body--wide reveal" style="font-family: var(--font-brutalist); text-transform: uppercase; letter-spacing: var(--tracking-wider); color: var(--color-accent-2); font-size: var(--type-subhead-room);">
+            "Why use many token<br/>
+            when few token do trick."
+          </p>
+          <p class="slide__body slide__body--wide reveal" style="color: var(--color-muted); max-width: 34ch;">
+            Drop articles, filler, hedging, pleasantries.<br/>
+            Keep facts, verbs, code.<br/>
+            The model's reasoning is unchanged —
+            only the <em>speech</em> compresses.
+          </p>
+        </div>
+        <div class="stack">
+          <p class="slide__eyebrow reveal">Before · 82 tokens</p>
+          <div class="code-block reveal" style="white-space: normal; font-size: clamp(0.85rem, 1vw, 1.15rem);">Certainly! I'd be happy to help you debug this. Looking at the code you've shared, it appears that there might potentially be an issue with how the async function is handling the promise. It's possible the function returns before the promise resolves, which could lead to unexpected behavior. Would you like me to walk through it?</div>
+          <p class="slide__eyebrow reveal" style="color: var(--color-accent-2);">After · 13 tokens · <span class="accent-gold">-84%</span></p>
+          <div class="code-block reveal" style="white-space: normal; font-size: clamp(0.85rem, 1vw, 1.15rem);">async fire. promise not cook yet. add await line 12. ugh.</div>
+          <blockquote class="quote reveal" style="font-size: var(--type-body-room); color: var(--color-muted); margin-top: 0.5rem;">
+            ~65% average output reduction across real tasks.
+            More headroom before compaction. Cheaper subagent chains.
+            <span class="quote__source">— github.com/juliusbrussee/caveman</span>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE — SUBAGENT ISOLATION                              -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="stack" style="align-content: start;">
+        <p class="slide__eyebrow reveal">Move 02 · Isolate, literally</p>
+        <h2 class="slide__title reveal">
+          Fork a<br/>
+          <span class="accent-red">clean shell.</span>
+        </h2>
+
+        <div class="two-col reveal" style="margin-top: 1.5rem; gap: 2rem; align-items: start;">
+          <div class="stack">
+            <p class="slide__eyebrow" style="color: var(--color-muted);">Without subagent · main context</p>
+            <div class="code-block" style="white-space: normal; font-size: clamp(1.1rem, 1.4vw, 1.5rem); line-height: 1.55;">Read · Read · ... × 30 · Grep · Grep · Edit · Bash · FAIL · Edit · Bash · PASS · "here's what I found"</div>
+          </div>
+          <div class="stack">
+            <p class="slide__eyebrow" style="color: var(--color-accent-2);">With subagent · main context</p>
+            <div class="code-block" style="white-space: normal; font-size: clamp(1.1rem, 1.4vw, 1.5rem); line-height: 1.55; border-left-color: var(--color-accent-2);">[subagent] Fixed null check in auth.py:47. All tests pass.</div>
+          </div>
+        </div>
+
+        <p class="slide__body slide__body--wide reveal" style="margin-top: 2rem; font-size: var(--type-subhead-room); max-width: 60ch;">
+          Subagent gets its own <strong>fresh 200K window.</strong>
+          Noise stays inside. Main gets <strong>one summary.</strong>
+          Anthropic multi-agent: <span class="accent-gold" style="font-family: var(--font-brutalist);">+90.2%</span> vs single agent.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE — HIDDEN CONTEXT COSTS (MCP · SKILLS · CLAUDE.md) -->
+    <!-- ===================================================== -->
+    <section class="slide">
+      <div class="stack" style="align-content: start;">
+        <p class="slide__eyebrow reveal">Before you even type</p>
+        <h2 class="slide__title reveal">
+          The <span class="accent-red">hidden tax.</span>
+        </h2>
+        <p class="slide__body slide__body--wide reveal">
+          MCPs, skills, <code style="font-family: var(--font-brutalist); color: var(--color-accent-2);">CLAUDE.md</code> —
+          all load <strong>before your first message.</strong>
+        </p>
+
+        <div class="moves-grid reveal" style="grid-template-columns: repeat(3, 1fr); margin-top: 1rem;">
+          <div class="move">
+            <div class="move__num">MCP</div>
+            <div class="move__name">loads every turn</div>
+            <p class="move__desc">
+              playwright: <strong>~13.6K</strong> tokens.<br/>
+              sqlite-tools: <strong>~13.4K</strong>.<br/>
+              Heavy kit: <strong>66K+</strong> before you type.<br/>
+              Tool defs reload on every request.
+            </p>
+          </div>
+          <div class="move">
+            <div class="move__num">SKILL</div>
+            <div class="move__name">loads on demand</div>
+            <p class="move__desc">
+              Skills inject only when invoked.<br/>
+              <strong>Prefer skills over MCPs</strong> for rarely-used tools —
+              same capability, zero baseline cost.
+            </p>
+          </div>
+          <div class="move">
+            <div class="move__num">MD</div>
+            <div class="move__name">always loaded</div>
+            <p class="move__desc">
+              <code style="font-family: var(--font-brutalist); color: var(--color-accent-2);">CLAUDE.md</code> prepended to every session.<br/>
+              Cap at <strong>200 lines.</strong> Essentials only.<br/>
+              Over-stuffed memory = over-taxed attention.
+            </p>
+          </div>
+        </div>
+
+        <p class="slide__body slide__body--wide reveal" style="margin-top: 2rem; font-size: var(--type-subhead-room); max-width: 54ch;">
+          A heavy kit can burn <strong class="accent-gold">25–33%</strong> of your 200K window
+          before the first token of your request.
+          That's <em>attention budget you've already spent.</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SECTION OPENER — META PROMPTING                         -->
+    <!-- ===================================================== -->
+    <section class="slide slide--title">
+      <div class="hero">
+        <p class="slide__eyebrow reveal">Next — the prompts</p>
+        <h1 class="slide__title slide__title--massive reveal">
+          META<br/>
+          PROMPT<span class="accent-red">—</span><br/>
+          ING.
+        </h1>
+        <p class="reveal" style="font-family: var(--font-brutalist); font-size: var(--type-subhead-room); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent-2); margin-top: 1.5rem;">
+          Compile your prompts.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE — META PROMPTING                                  -->
     <!-- ===================================================== -->
     <section class="slide">
       <div class="two-col">
@@ -362,7 +535,23 @@
     </section>
 
     <!-- ===================================================== -->
-    <!-- SLIDE 09 — GSD FRAMEWORK                                -->
+    <!-- SECTION OPENER — BUILD                                  -->
+    <!-- ===================================================== -->
+    <section class="slide slide--title">
+      <div class="hero">
+        <p class="slide__eyebrow reveal">Now — the loop &amp; the library</p>
+        <h1 class="slide__title slide__title--massive reveal">
+          BUI<span class="accent-red">—</span><br/>
+          LD.
+        </h1>
+        <p class="reveal" style="font-family: var(--font-brutalist); font-size: var(--type-subhead-room); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-accent-2); margin-top: 1.5rem;">
+          Ship the agent.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SLIDE — GSD FRAMEWORK                                   -->
     <!-- ===================================================== -->
     <section class="slide">
       <div class="stack" style="align-content: start;">
@@ -421,7 +610,7 @@ npx get-shit-done-cc@latest</div>
     </section>
 
     <!-- ===================================================== -->
-    <!-- SLIDE 10 — CLAUDE AGENT SDK                            -->
+    <!-- SLIDE 11 — CLAUDE AGENT SDK                            -->
     <!-- ===================================================== -->
     <section class="slide">
       <div class="stack" style="align-content: start;">
@@ -471,716 +660,7 @@ asyncio.run(main())</div>
     </section>
 
     <!-- ===================================================== -->
-    <!-- SLIDE 11 — PART 2 TRANSITION                           -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper">
-      <span class="register-mark --tl"></span>
-      <span class="register-mark --tr"></span>
-      <span class="register-mark --bl"></span>
-      <span class="register-mark --br"></span>
-
-      <div class="stack stack--center">
-        <div class="part-chip reveal">
-          <strong>PART 02</strong> <span>The molt</span>
-        </div>
-
-        <div class="molt-transition">
-          <span class="molt-transition__crack"></span>
-          <h2 class="slide__title slide__title--massive reveal">
-            Building<br/>
-            <span class="accent-red">reliability</span><br/>
-            for your<br/>
-            autonomous agent.
-          </h2>
-        </div>
-
-        <div class="reveal" style="display:flex; gap: 1.25rem 2rem; align-items:baseline; flex-wrap: wrap; margin-top: 1.5rem;">
-          <span class="slide__eyebrow" style="margin:0;">By</span>
-          <span style="font-family: var(--font-editorial); font-size: var(--type-subhead-room); font-style: italic; color: var(--color-fg);">
-            Rayyan Zahid
-          </span>
-        </div>
-
-        <p class="reveal" style="font-family: var(--font-editorial); font-style: italic; font-size: var(--type-subhead-room); color: var(--color-muted); max-width: 40ch; margin-top: 1rem;">
-          Part 1 was the context.<br />
-          Part 2 is <span style="color: var(--color-accent-1); font-style: normal; font-weight: 700;">the chassis</span>.
-        </p>
-      </div>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- PRE-SLIDE 12 — Reliability gap (stack variant)         -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper slide--pre">
-      <span class="register-mark --tl"></span>
-      <span class="register-mark --br"></span>
-
-      <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — the thesis</span>
-      </div>
-
-      <div class="pre-b__col">
-        <div class="pre-b__cell pre-b__cell--blob-1"></div>
-        <div class="pre-b__cell pre-b__cell--blob-2"></div>
-        <div class="pre-b__cell pre-b__cell--blob-3"></div>
-        <div class="pre-b__cell pre-b__cell--blob-4"></div>
-        <div class="pre-b__cell pre-b__cell--blob-5"></div>
-      </div>
-
-      <p class="pre__caption">Stack the primitives.</p>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- SLIDE 12 — THE RELIABILITY GAP                         -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper">
-      <div class="two-col">
-        <div class="stack stack--center">
-          <p class="slide__eyebrow reveal">Demo → prod</p>
-          <h2 class="slide__title reveal">
-            Your agent<br/>
-            demoed <em style="color: var(--color-accent-1); font-style: normal;">beautifully.</em>
-          </h2>
-          <h2 class="slide__title reveal" style="color: var(--color-accent-2);">
-            It failed<br/>
-            in <em style="font-style: normal;">production.</em>
-          </h2>
-        </div>
-        <div class="stack stack--center">
-          <blockquote class="quote reveal" style="max-width: 28ch;">
-            Reliability is not a property<br />
-            of the model.
-            <br /><br />
-            It's a <span style="color: var(--color-accent-1); font-style: normal; font-weight: 700;">stack of primitives</span> you build around it.
-            <span class="quote__source">— the thesis of Part 02</span>
-          </blockquote>
-          <p class="slide__body slide__body--wide reveal" style="color: var(--color-muted); font-size: var(--type-subhead-room);">
-            Six primitives. Stack them and your agent becomes boring.<br />
-            <strong style="color: var(--color-accent-2);">Boring compounds.</strong>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- PRE-SLIDE 13 — Typed verbs (shape morph)               -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper slide--pre">
-      <span class="register-mark --tl"></span>
-      <span class="register-mark --br"></span>
-
-      <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 01</span>
-      </div>
-
-      <div class="pre-b__row">
-        <div class="pre-b__cell pre-b__cell--blob-1"></div>
-        <div class="pre-b__cell pre-b__cell--blob-2"></div>
-        <div class="pre-b__cell pre-b__cell--blob-3"></div>
-        <div class="pre-b__cell pre-b__cell--blob-4"></div>
-        <div class="pre-b__cell pre-b__cell--blob-5"></div>
-      </div>
-      <div class="pre-b__labels">
-        <span>result</span>
-        <span>result</span>
-        <span>result</span>
-        <span>result</span>
-        <span>result</span>
-      </div>
-
-      <p class="pre__caption">Every call. Same shape.</p>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- SLIDE 13 — TYPED VERB CAPABILITIES (THE KERNEL)        -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper">
-      <div class="stack" style="align-content: start;">
-        <div class="part-chip reveal">
-          <strong>PRIMITIVE 01</strong> <span>Typed verbs</span>
-        </div>
-        <h2 class="slide__title reveal">
-          Agents decide<br/>
-          on <span class="accent-red">shapes.</span>
-        </h2>
-        <p class="slide__body slide__body--wide reveal" style="font-size: var(--type-subhead-room); max-width: 48ch;">
-          <em style="font-style: italic; color: var(--color-muted);">"Poka-yoke your tools. Change the arguments so that it is harder to make mistakes."</em> — <span style="color: var(--color-accent-1); font-weight: 700;">Anthropic</span>
-        </p>
-
-        <div class="two-col reveal" style="margin-top: 1.5rem; align-items: start;">
-          <div class="stack">
-            <p class="slide__eyebrow" style="color: var(--color-accent-2);">⨯ Before — shape roulette</p>
-            <div class="code-block">
-<span class="com"># returns ??? — agent guesses</span>
-data = telegram.fetch_unread(50)
-<span class="kw">if</span> data:
-    <span class="kw">for</span> m <span class="kw">in</span> data.get(<span class="str">"msgs"</span>, []):
-        handle(m)
-<span class="com"># crashes on rate limit</span>
-<span class="com"># silent None on auth expired</span></div>
-          </div>
-          <div class="stack">
-            <p class="slide__eyebrow" style="color: #006b3c;">✓ After — total function</p>
-            <div class="code-block">
-<span class="kw">from</span> kernel.capabilities.telegram <span class="kw">import</span> get_unread
-
-r = <span class="fn">get_unread</span>(limit=<span class="str">50</span>)
-
-<span class="kw">if</span> r.ok:
-    <span class="kw">for</span> m <span class="kw">in</span> r.messages:
-        triage(m)
-<span class="kw">elif</span> r.error_kind == <span class="str">"rate_limit"</span>:
-    sleep(r.wait_s)
-<span class="kw">elif</span> r.error_kind == <span class="str">"auth_expired"</span>:
-    notify()</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- PRE-SLIDE 14 — Error taxonomy (classify variant)       -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper slide--pre">
-      <span class="register-mark --tl"></span>
-      <span class="register-mark --br"></span>
-
-      <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 02</span>
-      </div>
-
-      <div class="pre-b__row">
-        <div class="pre-b__cell pre-b__cell--blob-1" data-label="auth"></div>
-        <div class="pre-b__cell pre-b__cell--blob-2" data-label="rate"></div>
-        <div class="pre-b__cell pre-b__cell--blob-3" data-label="transient"></div>
-        <div class="pre-b__cell pre-b__cell--blob-4" data-label="?"></div>
-        <div class="pre-b__cell pre-b__cell--blob-5" data-label="kind"></div>
-      </div>
-
-      <p class="pre__caption">Name the failures.</p>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- SLIDE 14 — ERROR TAXONOMY                              -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper">
-      <div class="two-col two-col--weighted">
-        <div class="stack stack--center">
-          <div class="part-chip reveal">
-            <strong>PRIMITIVE 02</strong> <span>Error taxonomy</span>
-          </div>
-          <h2 class="slide__title reveal">
-            Errors are part<br/>
-            of your <span class="accent-red">API.</span>
-          </h2>
-          <p class="slide__body slide__body--wide reveal" style="font-size: var(--type-subhead-room); max-width: 34ch;">
-            Agents branch deterministically on <code style="font-family: var(--font-brutalist); color: var(--color-accent-1);">error_kind</code>.
-            Not by parsing stack traces.
-          </p>
-        </div>
-        <div class="stack">
-          <p class="slide__eyebrow reveal" style="color: var(--color-muted);">Telegram · kernel.capabilities.telegram</p>
-          <div class="err-table reveal">
-            <div class="err-table__row --head">
-              <span>Kind</span><span>When</span><span>Action</span>
-            </div>
-            <div class="err-table__row">
-              <span class="err-table__kind">auth_expired</span>
-              <span class="err-table__when">Session revoked / 2FA</span>
-              <span class="err-table__action">Surface. Re-auth interactively.</span>
-            </div>
-            <div class="err-table__row">
-              <span class="err-table__kind">rate_limit</span>
-              <span class="err-table__when">FloodWaitError</span>
-              <span class="err-table__action">Wait. Don't hammer.</span>
-            </div>
-            <div class="err-table__row">
-              <span class="err-table__kind">transient</span>
-              <span class="err-table__when">Network, timeout</span>
-              <span class="err-table__action">Retry once, backoff.</span>
-            </div>
-            <div class="err-table__row">
-              <span class="err-table__kind">unknown</span>
-              <span class="err-table__when">Anything else</span>
-              <span class="err-table__action">Surface. Never silent.</span>
-            </div>
-          </div>
-          <p class="reveal" style="font-family: var(--font-brutalist); font-size: var(--type-caption-room); color: var(--color-muted); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-top: 1rem;">
-            "No silent retries. Classify and surface." — kernel design rule
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- PRE-SLIDE 15 — Ledger (stream variant)                  -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper slide--pre">
-      <span class="register-mark --tl"></span>
-      <span class="register-mark --br"></span>
-
-      <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 03</span>
-      </div>
-
-      <div class="pre-b__stream">
-        <div class="pre-b__cell pre-b__cell--blob-1"></div>
-        <div class="pre-b__cell pre-b__cell--blob-2"></div>
-        <div class="pre-b__cell pre-b__cell--blob-3"></div>
-        <div class="pre-b__cell pre-b__cell--blob-4"></div>
-        <div class="pre-b__cell pre-b__cell--blob-5"></div>
-      </div>
-
-      <p class="pre__caption">Log everything.</p>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- SLIDE 15 — THE LEDGER                                   -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper">
-      <div class="stack" style="align-content: start;">
-        <div class="part-chip reveal">
-          <strong>PRIMITIVE 03</strong> <span>The ledger</span>
-        </div>
-        <h2 class="slide__title reveal">
-          You can't improve<br/>
-          what you don't <span class="accent-red">measure.</span>
-        </h2>
-
-        <div class="two-col reveal" style="margin-top: 1rem; align-items: start;">
-          <div class="stack">
-            <p class="slide__eyebrow" style="color: var(--color-muted);">data/kernel_telemetry.jsonl</p>
-            <div class="ledger-stream">
-<span class="ts">10:14:02.311</span>  <span class="verb">telegram.get_unread</span>   <span class="ok">ok</span>  1.42s
-<span class="ts">10:14:03.890</span>  <span class="verb">gmail.get_inbox</span>       <span class="ok">ok</span>  0.81s
-<span class="ts">10:14:04.122</span>  <span class="verb">calendar.get_today</span>    <span class="ok">ok</span>  0.33s
-<span class="ts">10:14:18.907</span>  <span class="verb">telegram.send_message</span> <span class="fail">fail</span> rate_limit 3.2s
-<span class="ts">10:14:22.551</span>  <span class="verb">telegram.send_message</span> <span class="ok">ok</span>  0.94s
-<span class="ts">10:14:31.014</span>  <span class="verb">linkedin.get_inbox</span>    <span class="ok">ok</span>  2.18s</div>
-          </div>
-          <div class="stack">
-            <p class="slide__eyebrow" style="color: var(--color-muted);">What the dashboard surfaces</p>
-            <ul class="bullet-list bullet-list--bare" style="font-size: var(--type-body-room);">
-              <li><div><strong style="color: var(--color-accent-1);">Per-verb success rate</strong> — which tools are flaky</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">p50 / p95 latency</strong> — which tools hog the turn</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Error distribution</strong> — auth vs rate vs transient</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Agent feedback loop</strong> — agents can query their own history</div></li>
-            </ul>
-            <p style="font-family: var(--font-brutalist); font-size: var(--type-caption-room); color: var(--color-muted); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-top: 0.75rem;">
-              Fire-and-forget. A logging failure never breaks a verb.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- PRE-SLIDE 16 — Gates (pass/block variant)              -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper slide--pre">
-      <span class="register-mark --tl"></span>
-      <span class="register-mark --br"></span>
-
-      <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 04</span>
-      </div>
-
-      <div class="pre-b__row">
-        <div class="pre-b__cell pre-b__cell--blob-1"></div>
-        <div class="pre-b__cell pre-b__cell--blob-2"></div>
-        <div class="pre-b__cell pre-b__cell--blob-3"></div>
-        <div class="pre-b__gate-bar"></div>
-        <div class="pre-b__cell pre-b__cell--blob-4 pre-b__cell--blocked"></div>
-        <div class="pre-b__cell pre-b__cell--blob-5 pre-b__cell--blocked"></div>
-      </div>
-
-      <p class="pre__caption">Gate before act.</p>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- SLIDE 16 — GATES (HOOKS)                                -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper">
-      <div class="two-col">
-        <div class="stack stack--center">
-          <div class="part-chip reveal">
-            <strong>PRIMITIVE 04</strong> <span>Hard gates</span>
-          </div>
-          <h2 class="slide__title reveal">
-            Don't trust agents<br/>
-            to <em style="font-style: normal; color: var(--color-muted);">remember.</em><br/>
-            <span class="accent-red">Gate</span> the action.
-          </h2>
-          <p class="slide__body slide__body--wide reveal" style="font-size: var(--type-subhead-room); max-width: 32ch;">
-            <strong>PreToolUse</strong> blocks before.<br />
-            <strong>PostToolUse</strong> verifies after.<br />
-            Deterministic. <em style="color: var(--color-accent-2); font-style: normal;">Seatbelts.</em>
-          </p>
-          <span class="gate-sign reveal">⨯ Blocked</span>
-        </div>
-        <div class="stack">
-          <p class="slide__eyebrow reveal" style="color: var(--color-muted);">.claude/settings.json</p>
-          <div class="code-block reveal">
-<span class="str">"hooks"</span>: {
-  <span class="str">"PreToolUse"</span>: [{
-    <span class="str">"matcher"</span>: <span class="str">"Bash"</span>,
-    <span class="str">"command"</span>: <span class="str">"block-prod-writes.js"</span>
-  }],
-  <span class="str">"Stop"</span>: [{
-    <span class="str">"command"</span>: <span class="str">"atomic-commit-gate.js"</span>
-  }]
-}</div>
-          <p class="reveal" style="font-family: var(--font-expressive); font-size: var(--type-body-room); color: var(--color-fg); font-weight: 300; margin-top: 1rem; max-width: 40ch;">
-            Real hooks shipping in this repo:<br />
-            <strong style="color: var(--color-accent-1);">atomic-commit-gate</strong> — no session-end with a dirty tree.<br />
-            <strong style="color: var(--color-accent-1);">require-agent-name</strong> — every Agent call must be tagged.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- PRE-SLIDE 17 — CDP (merge variant)                      -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper slide--pre">
-      <span class="register-mark --tl"></span>
-      <span class="register-mark --br"></span>
-
-      <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 05a</span>
-      </div>
-
-      <div class="pre-b__merge">
-        <div class="pre-b__cell pre-b__cell--blob-1 pre-b__cell--collapse"></div>
-        <div class="pre-b__cell pre-b__cell--blob-2 pre-b__cell--collapse"></div>
-        <div class="pre-b__cell pre-b__cell--blob-3 pre-b__cell--expand"></div>
-        <div class="pre-b__cell pre-b__cell--blob-4 pre-b__cell--collapse"></div>
-        <div class="pre-b__cell pre-b__cell--blob-5 pre-b__cell--collapse"></div>
-      </div>
-
-      <p class="pre__caption">One wire, not five.</p>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- SLIDE 17 — BROWSER: CDP > PLAYWRIGHT MCP                -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper">
-      <div class="stack" style="align-content: start;">
-        <div class="part-chip reveal">
-          <strong>PRIMITIVE 05a</strong> <span>Closest to the metal</span>
-        </div>
-        <h2 class="slide__title reveal">
-          Prefer raw <span class="accent-red">CDP</span><br/>
-          over browser tools.
-        </h2>
-
-        <!-- Token-cost visual: measured by Zechner/Zhang -->
-        <div class="reveal rot-chart" style="margin-top: 1rem;">
-          <div class="rot-bar">
-            <span>Playwright&nbsp;MCP</span>
-            <div class="rot-bar__fill" data-width="95" style="background: linear-gradient(90deg, var(--color-accent-2), #e36b44);"></div>
-            <span class="rot-bar__val" style="color: var(--color-accent-2);">~114K</span>
-          </div>
-          <div class="rot-bar">
-            <span>DevTools&nbsp;MCP</span>
-            <div class="rot-bar__fill" data-width="41" style="background: linear-gradient(90deg, var(--color-accent-1), #5b8dd6);"></div>
-            <span class="rot-bar__val" style="color: var(--color-accent-1);">~50K</span>
-          </div>
-          <div class="rot-bar">
-            <span>Raw&nbsp;CDP</span>
-            <div class="rot-bar__fill" data-width="27" style="background: linear-gradient(90deg, #00874a, #3fb271);"></div>
-            <span class="rot-bar__val" style="color: #00874a;">~7K</span>
-          </div>
-        </div>
-        <p class="reveal" style="font-family: var(--font-brutalist); font-size: var(--type-caption-room); color: var(--color-muted); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-top: 0.4rem;">
-          Tokens per 10-step automation · measured by Zechner / Zhang · ~16× delta
-        </p>
-
-        <div class="two-col reveal" style="margin-top: 1.75rem; align-items: start;">
-          <div class="stack">
-            <p class="slide__eyebrow" style="color: var(--color-muted);">linkedin/nav.py — the nav abstraction</p>
-            <div class="code-block">
-<span class="kw">def</span> <span class="fn">goto_messaging</span>(cdp) -&gt; <span class="kw">bool</span>:
-    cdp.navigate(MESSAGING_URL)
-    <span class="com"># Phase 1: route changed</span>
-    <span class="kw">if not</span> cdp.wait_for(
-        <span class="str">"location.href.includes('/messaging')"</span>,
-        attempts=<span class="str">20</span>,
-    ):
-        <span class="kw">return</span> <span class="kw">False</span>
-    <span class="com"># Phase 2: DOM populated</span>
-    <span class="kw">return</span> cdp.wait_for(
-        <span class="str">"document.querySelectorAll('li.msg-conv').length &gt;= 1"</span>,
-        attempts=<span class="str">30</span>,
-    )</div>
-          </div>
-          <div class="stack">
-            <blockquote class="quote" style="font-size: var(--type-subhead-room); max-width: 32ch;">
-              "Playwright drives the browser.<br />DevTools MCP <em style="color: var(--color-accent-1); font-style: normal; font-weight: 700;">debugs</em> one."
-              <span class="quote__source">— Steve Kinney</span>
-            </blockquote>
-            <ul class="bullet-list bullet-list--bare" style="font-size: var(--type-body-room);">
-              <li><div><strong style="color: var(--color-accent-1);">Session reuse</strong> — attach to logged-in Chrome</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Nav is the single source</strong> for selectors</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Two-phase waits</strong> — route then DOM, not sleep(2)</div></li>
-              <li><div><strong style="color: var(--color-muted);">Fallback: Playwright MCP for weird JS flows</strong></div></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- PRE-SLIDE 18 — APIs (POST highlight variant)           -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper slide--pre">
-      <span class="register-mark --tl"></span>
-      <span class="register-mark --br"></span>
-
-      <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 05b</span>
-      </div>
-
-      <div class="pre-b__row">
-        <div class="pre-b__cell pre-b__cell--blob-1" data-label="get"></div>
-        <div class="pre-b__cell pre-b__cell--blob-2" data-label="get"></div>
-        <div class="pre-b__cell pre-b__cell--blob-3 pre-b__cell--post" data-label="post"></div>
-        <div class="pre-b__cell pre-b__cell--blob-4" data-label="get"></div>
-        <div class="pre-b__cell pre-b__cell--blob-5 pre-b__cell--post" data-label="post"></div>
-      </div>
-
-      <p class="pre__caption">Find the POST.</p>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- SLIDE 18 — APIs FIRST, POSTs ARE GOLD                  -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper">
-      <div class="stack" style="align-content: start;">
-        <div class="part-chip reveal">
-          <strong>PRIMITIVE 05b</strong> <span>API first</span>
-        </div>
-        <h2 class="slide__title reveal">
-          Hunt for <span class="accent-red">POSTs.</span><br/>
-          <span style="font-size: 0.75em; color: var(--color-muted);">Then rate-limit yourself.</span>
-        </h2>
-
-        <div class="two-col reveal" style="margin-top: 1rem; align-items: start;">
-          <div class="stack">
-            <p class="slide__eyebrow" style="color: var(--color-muted);">DevTools → Network → filter: Fetch/XHR</p>
-            <div class="post-sniff">
-              <div class="post-sniff__row">
-                <span class="post-sniff__verb">GET</span>
-                <span class="post-sniff__path">/api/v1/session</span>
-                <span class="post-sniff__tag">meh</span>
-              </div>
-              <div class="post-sniff__row">
-                <span class="post-sniff__verb">GET</span>
-                <span class="post-sniff__path">/api/v1/me/preferences</span>
-                <span class="post-sniff__tag">meh</span>
-              </div>
-              <div class="post-sniff__row --hit">
-                <span class="post-sniff__verb --post">POST</span>
-                <span class="post-sniff__path">/api/v1/events/{id}/publish</span>
-                <span class="post-sniff__tag">★ gold</span>
-              </div>
-              <div class="post-sniff__row --hit">
-                <span class="post-sniff__verb --post">POST</span>
-                <span class="post-sniff__path">/api/v1/messages/send</span>
-                <span class="post-sniff__tag">★ gold</span>
-              </div>
-              <div class="post-sniff__row">
-                <span class="post-sniff__verb">GET</span>
-                <span class="post-sniff__path">/analytics/ping</span>
-                <span class="post-sniff__tag">skip</span>
-              </div>
-            </div>
-            <p style="font-family: var(--font-brutalist); font-size: var(--type-caption-room); color: var(--color-muted); letter-spacing: var(--tracking-wider); text-transform: uppercase; margin-top: 0.5rem;">
-              Replicate in plain HTTP. Copy cookies. Done.
-            </p>
-          </div>
-          <div class="stack">
-            <p class="slide__eyebrow" style="color: var(--color-muted);">AWS Full Jitter · Marc Brooker (2015)</p>
-            <div class="code-block" style="font-size: clamp(0.85rem, 1vw, 1.1rem);">
-<span class="com"># the canonical formula</span>
-sleep = random(<span class="str">0</span>, min(cap, base * <span class="str">2</span>**attempt))</div>
-            <div class="rate-meter">
-              <div>Telegram send throttle</div>
-              <div class="rate-meter__track"><div class="rate-meter__fill"></div></div>
-              <div>~12 msg / minute · Full Jitter on FloodWait</div>
-            </div>
-            <p class="slide__body slide__body--wide" style="font-size: var(--type-body-room); max-width: 36ch; margin-top: 0.75rem;">
-              Rate-limit yourself or the platform will do it. LinkedIn: <strong style="color: var(--color-accent-2);">24–72h</strong> on first offense,
-              <strong style="color: var(--color-accent-2);">permanent</strong> on third.
-            </p>
-            <ul class="bullet-list bullet-list--bare" style="font-size: var(--type-body-room);">
-              <li><div><strong style="color: var(--color-accent-1);">API</strong> beats browser.</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">POST</strong> beats GET-scraping.</div></li>
-              <li><div><strong style="color: var(--color-accent-1);">Restraint</strong> beats speed.</div></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- PRE-SLIDE 19 — HITL (pair variant)                      -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper slide--pre">
-      <span class="register-mark --tl"></span>
-      <span class="register-mark --br"></span>
-
-      <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — primitive 06</span>
-      </div>
-
-      <div class="pre-b__row">
-        <div class="pre-b__cell pre-b__cell--blob-1 pre-b__cell--fade"></div>
-        <div class="pre-b__cell pre-b__cell--blob-2 pre-b__cell--hitl-agent" data-label="agent"></div>
-        <div class="pre-b__cell pre-b__cell--blob-3 pre-b__cell--fade"></div>
-        <div class="pre-b__cell pre-b__cell--blob-4 pre-b__cell--hitl-human" data-label="you"></div>
-        <div class="pre-b__cell pre-b__cell--blob-5 pre-b__cell--fade"></div>
-      </div>
-
-      <p class="pre__caption">Sit next to it.</p>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- SLIDE 19 — HUMAN IN THE LOOP                            -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper">
-      <div class="stack" style="align-content: start;">
-        <div class="part-chip reveal">
-          <strong>PRIMITIVE 06</strong> <span>Tight cycles</span>
-        </div>
-        <h2 class="slide__title reveal">
-          Sit next to<br/>
-          your agent.<br/>
-          Save <span class="accent-red">months.</span>
-        </h2>
-
-        <div class="pipeline reveal">
-          <div class="pipeline__step">
-            <span class="pipeline__num">01</span>
-            <span class="pipeline__name">Validate</span>
-            <p class="pipeline__note">Input passes schema? Target exists?</p>
-          </div>
-          <div class="pipeline__step">
-            <span class="pipeline__num">02</span>
-            <span class="pipeline__name">Summarize</span>
-            <p class="pipeline__note">Show intent in one paragraph.</p>
-          </div>
-          <div class="pipeline__step">
-            <span class="pipeline__num">03</span>
-            <span class="pipeline__name">Approve</span>
-            <p class="pipeline__note">Human greenlights. Or redirects.</p>
-          </div>
-          <div class="pipeline__step">
-            <span class="pipeline__num">04</span>
-            <span class="pipeline__name">Act</span>
-            <p class="pipeline__note">Execute. Log. Report result.</p>
-          </div>
-        </div>
-
-        <div class="two-col reveal" style="margin-top: 2rem; align-items: center;">
-          <div class="stack">
-            <p class="slide__body slide__body--wide" style="font-size: var(--type-subhead-room); max-width: 44ch;">
-              Don't let the agent drift autonomously for weeks — it converges to <em style="color: var(--color-accent-2); font-style: normal;">garbage.</em>
-              Start tight. Widen the loop as <strong style="color: var(--color-accent-1);">trust compounds.</strong>
-            </p>
-          </div>
-          <div class="stack">
-            <blockquote class="quote" style="font-size: var(--type-subhead-room); max-width: 38ch;">
-              "The most successful AI products aren't purely agentic loops, but combine deterministic code with <em style="color: var(--color-accent-1); font-style: normal; font-weight: 700;">strategically placed LLM decision points.</em>"
-              <span class="quote__source">— Dexter Horthy · 12-Factor Agents</span>
-            </blockquote>
-            <p class="slide__body slide__body--wide" style="font-size: var(--type-subhead-room); max-width: 34ch; margin-top: 1rem;">
-              You're not training the model.<br />
-              You're training <strong style="color: var(--color-accent-2);">the harness</strong> around it.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- PRE-SLIDE 20 — Synthesis (six-grid variant)             -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper slide--pre">
-      <span class="register-mark --tl"></span>
-      <span class="register-mark --br"></span>
-
-      <div class="pre__chip">
-        <strong>PREVIEW</strong> <span>Up next — synthesis</span>
-      </div>
-
-      <div class="pre-b__grid">
-        <div class="pre-b__cell pre-b__cell--blob-1"></div>
-        <div class="pre-b__cell pre-b__cell--blob-2"></div>
-        <div class="pre-b__cell pre-b__cell--blob-3"></div>
-        <div class="pre-b__cell pre-b__cell--blob-4"></div>
-        <div class="pre-b__cell pre-b__cell--blob-5"></div>
-        <div class="pre-b__cell pre-b__cell--blob-1"></div>
-      </div>
-
-      <p class="pre__caption">All six. Stacked.</p>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- SLIDE 20 — SYNTHESIS: SIX PRIMITIVES                    -->
-    <!-- ===================================================== -->
-    <section class="slide slide--paper">
-      <div class="stack" style="align-content: start;">
-        <div class="part-chip reveal">
-          <strong>SYNTHESIS</strong> <span>Stack them</span>
-        </div>
-        <h2 class="slide__title reveal">
-          Six primitives.<br/>
-          Ship <span class="accent-red">boring</span> agents.
-        </h2>
-
-        <div class="primitives reveal">
-          <div class="primitive">
-            <span class="primitive__num">01</span>
-            <span class="primitive__name">Typed verbs</span>
-            <p class="primitive__note">Predictable shapes. <code style="font-family: var(--font-brutalist);">.ok / .error_kind</code>.</p>
-          </div>
-          <div class="primitive">
-            <span class="primitive__num">02</span>
-            <span class="primitive__name">Error taxonomy</span>
-            <p class="primitive__note">Errors are part of your API. Agents branch on kind.</p>
-          </div>
-          <div class="primitive">
-            <span class="primitive__num">03</span>
-            <span class="primitive__name">Ledger</span>
-            <p class="primitive__note">Every call logged. Per-verb metrics. Self-feedback loop.</p>
-          </div>
-          <div class="primitive">
-            <span class="primitive__num">04</span>
-            <span class="primitive__name">Hard gates</span>
-            <p class="primitive__note">PreToolUse / PostToolUse hooks. Seatbelts.</p>
-          </div>
-          <div class="primitive">
-            <span class="primitive__num">05</span>
-            <span class="primitive__name">CDP &amp; API first</span>
-            <p class="primitive__note">Closest to metal. Hunt POSTs. Rate-limit yourself.</p>
-          </div>
-          <div class="primitive">
-            <span class="primitive__num">06</span>
-            <span class="primitive__name">HITL</span>
-            <p class="primitive__note">Tight cycles. Train the harness. Save months.</p>
-          </div>
-        </div>
-
-        <p class="reveal" style="font-family: var(--font-editorial); font-style: italic; font-size: var(--type-headline-room); line-height: 1; margin-top: 2rem; max-width: 30ch; color: var(--color-fg);">
-          Boring agents <span style="color: var(--color-accent-1); font-style: normal; font-weight: 700;">compound.</span><br />
-          Exciting agents <span style="color: var(--color-accent-2); font-style: normal; font-weight: 700;">crash.</span>
-        </p>
-      </div>
-    </section>
-
-    <!-- ===================================================== -->
-    <!-- SLIDE 21 — WORKSHOP CTA                                 -->
+    <!-- SLIDE 12 — WORKSHOP CTA                                 -->
     <!-- ===================================================== -->
     <section class="slide">
       <div class="stack stack--center">
@@ -1206,7 +686,7 @@ sleep = random(<span class="str">0</span>, min(cap, base * <span class="str">2</
     </section>
 
     <!-- ===================================================== -->
-    <!-- SLIDE 12 — SOURCES & CREDITS                           -->
+    <!-- SLIDE 13 — SOURCES & CREDITS                           -->
     <!-- ===================================================== -->
     <section class="slide">
       <div class="stack" style="align-content: start;">
@@ -1226,9 +706,10 @@ sleep = random(<span class="str">0</span>, min(cap, base * <span class="str">2</
               <a href="https://www.trychroma.com/research/context-rot" target="_blank" rel="noopener">Chroma · Context rot study</a>
               <a href="https://www.dbreunig.com/2025/06/22/how-contexts-fail-and-how-to-fix-them.html" target="_blank" rel="noopener">Breunig · How contexts fail</a>
               <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus" target="_blank" rel="noopener">Manus · Lessons from production</a>
-              <a href="https://github.com/gsd-build/get-shit-done" target="_blank" rel="noopener">GSD · github.com/gsd-build</a>
-              <a href="https://dspy.ai/" target="_blank" rel="noopener">DSPy · programming not prompting</a>
-              <a href="https://code.claude.com/docs/en/agent-sdk/overview" target="_blank" rel="noopener">Claude Agent SDK · overview</a>
+              <a href="https://github.com/juliusbrussee/caveman" target="_blank" rel="noopener">Caveman · why use many token when few token do trick</a>
+              <a href="https://scottspence.com/posts/optimising-mcp-server-context-usage-in-claude-code" target="_blank" rel="noopener">Scott Spence · MCP server token overhead</a>
+              <a href="https://www.richsnapp.com/article/2025/10-05-context-management-with-subagents-in-claude-code" target="_blank" rel="noopener">Rich Snapp · Context management with subagents</a>
+              <a href="https://code.claude.com/docs/en/sub-agents" target="_blank" rel="noopener">Claude Code · Create custom subagents</a>
             </div>
           </div>
           <div class="stack">
